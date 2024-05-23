@@ -1,10 +1,31 @@
+/* Navbar.css */
 .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent; /* Fully transparent background */
+    z-index: 1000; /* Ensure it is above other elements */
     display: flex;
     justify-content: center;
-}
-
-.navbar-list {
+    padding: 20px;
+  }
+  
+  .navbar-list {
     list-style: none;
     display: flex;
     gap: 20px;
-}
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navbar-list a {
+    color: white; /* White text color for better visibility */
+    text-decoration: none;
+    padding: 10px;
+  }
+  
+  .navbar-list a:hover {
+    color:maroon;
+  }
+  

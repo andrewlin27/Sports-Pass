@@ -9,6 +9,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    height: 100vh;
   }
   
   .Home-logo {
@@ -36,9 +37,9 @@
   .title {
     font-size: 85px;
     margin-top: 60px;
-    color: black;
-    -webkit-text-stroke: 1px white;
-    font-style: italic;
+    color: white;
+    /* -webkit-text-stroke: 1px white;
+    font-style: italic; */
   }
   
   .button-container {
