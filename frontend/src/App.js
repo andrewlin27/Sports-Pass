@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -11,16 +11,18 @@ import Sell from './components/Sell';
 function App() {
   return (
     <div className="App">
-      <Navbar/>
+      <BrowserRouter>
+        <Navbar/>
 
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/schedule" element={<Schedule/>} />
-        <Route path="/buy" element={<Buy/>} />
-        <Route path="/sell" element={<Sell/>} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/schedule" element={<Schedule/>} />
+          <Route path="/buy" element={<Buy/>} />
+          <Route path="/sell" element={<Sell/>} />
+        </Routes>
 
-      <Footer/>
+        <Footer/>
+      </BrowserRouter>
     </div>
   );
 }
