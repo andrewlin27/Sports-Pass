@@ -58,6 +58,8 @@
   
   .btn:hover{
     background-color: maroon;
+    color: gold;
+    border-color: gold;
   }
   
   .btn-buy {
@@ -65,8 +67,6 @@
     color: black;
     border-color: black;
   }
-  
-
   
   .btn-sell {
     background-color: black;
