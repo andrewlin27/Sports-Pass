@@ -2,7 +2,9 @@ import React from 'react'
 
 const Schedule = () => {
   return (
-    <div>Schedule</div>
+    <div>
+        <img src='images/schedule.png'/>
+    </div>
   )
 }
 

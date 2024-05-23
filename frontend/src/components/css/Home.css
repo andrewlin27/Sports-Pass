@@ -35,8 +35,10 @@
   
   .title {
     font-size: 85px;
-    color: white;
     margin-top: 60px;
+    color: black;
+    -webkit-text-stroke: 1px white;
+    font-style: italic;
   }
   
   .button-container {
