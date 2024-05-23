@@ -1,5 +1,14 @@
 .App {
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-image: url('../public/images/KyleField.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .App-logo {
@@ -14,19 +23,78 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  /* background-image: url('../public/images/KyleField.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #282c34; 
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: white;*/
+  margin-top: 40px; 
 }
+
+
+
 
 .App-link {
   color: #61dafb;
 }
+
+.title {
+  font-size: 85px;
+  color: white;
+  margin-top: 60px;
+}
+
+.button-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 10px 80px;
+  font-size: 16px;
+  border: 2px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  
+}
+
+.btn:hover{
+  background-color: maroon;
+}
+
+.btn-buy {
+  background-color: white;
+  color: black;
+  border-color: black;
+}
+
+/* .btn-buy:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
+} */
+
+.btn-sell {
+  background-color: black;
+  color: white;
+  border-color: white;
+}
+
+/* .btn-sell:hover {
+  background-color: white;
+  color: black;
+  border-color: black;
+} */
 
 @keyframes App-logo-spin {
   from {
