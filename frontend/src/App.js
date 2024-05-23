@@ -1,16 +1,22 @@
 import React from 'react';
 import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Home from './components/Home';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Schedule from './components/Schedule';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1 className="title">Aggie Sports Pass</h1>
-        <div className="button-container">
-          <button className="btn btn-buy">Buy Now</button>
-          <button className="btn btn-sell">Sell Now</button>
-        </div>
-      </header>
+      <Navbar/>
+
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/schedule" element={<Schedule/>} />
+      </Routes>
+
+      <Footer/>
     </div>
   );
 }
