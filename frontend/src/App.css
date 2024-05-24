@@ -1,9 +1,11 @@
-.App{
-    background-image: url('../public/images/KyleField.jpeg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100vh;
+.App {
+  background-image: url('../public/images/KyleField.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  overflow: hidden; /* Prevent scrolling in the main container */
+  /* justify-content:center; */
 }
 
 .fade-enter {
@@ -25,7 +27,7 @@
 .fade-exit-active {
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 300ms ease, transform 300ms ease;
+  transition: opacity 0ms ease, transform 0ms ease;
 }
 
 

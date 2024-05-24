@@ -9,6 +9,7 @@ import Buy from './components/Buy';
 import Sell from './components/Sell';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+
 const App = () => {
   const location = useLocation();
 

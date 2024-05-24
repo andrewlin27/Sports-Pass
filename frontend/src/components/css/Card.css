@@ -1,0 +1,43 @@
+.card {
+    position: relative;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    text-align: center;
+    margin: 16px;
+  }
+  
+  .card-date-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background-color: #000;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 0.8em;
+  }
+  
+  .card-img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-content {
+    padding: 16px;
+  }
+  
+  .card-seller {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  .card-price {
+    margin: 8px 0 0;
+    font-size: 1.2em;
+    color: #666;
+  }
+  

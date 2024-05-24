@@ -1,0 +1,26 @@
+.buy-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden; /* Ensure no horizontal scrollbar appears */
+  }
+  
+  .cards-container {
+    max-height: 100vh; /* Adjust this value as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+
+  .cards-container::-webkit-scrollbar {
+    width: 0; /* Hide scrollbar for Chrome, Safari, and Opera */
+  }
+  
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 5%;
+    width: 90%;
+    max-width: 1200px; /* Optional: Limit the maximum width of the cards container */
+    margin: auto; /* Center the cards horizontally within the buy-container */
+  }
+  
