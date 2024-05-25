@@ -39,7 +39,7 @@ const Sell = () => {
           setImageField(
             <div className="form-group">
               <label htmlFor="photos">Photos<span className="required"> *</span></label>
-              <input type="file" id="photos" name="photos" accept="image/*" multiple required />
+              <input type="file" id="photos" name="photos" accept="image/*" multiple onChange={handleFileChange} required />
             </div>
           );
           
@@ -56,6 +56,13 @@ const Sell = () => {
             );
           }
         }
+    };
+
+    const handleFileChange = (e) => {
+      if (e.target.files.length > 5) {
+          alert('You can only upload a maximum of 5 images');
+          e.target.value = null;
+      }
     };
 
     return (
@@ -90,7 +97,7 @@ const Sell = () => {
 
                 <div className="form-group">
                     <label htmlFor="description">Description:</label>
-                    <textarea id="description" name="description" rows="4"></textarea>
+                    <textarea id="description" name="description" rows="4" placeholder='(recommended)'></textarea>
                 </div>
 
                 <div className="form-group">
@@ -100,7 +107,7 @@ const Sell = () => {
 
                 <div className="form-group">
                     <label htmlFor="password">Password<span className="required"> *</span></label>
-                    <input type="password" id="password" name="password" required />
+                    <input type="password" id="password" name="password" placeholder='(used when deleting your post)' required />
                 </div>
 
                 {imageField}
