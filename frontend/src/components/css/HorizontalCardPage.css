@@ -1,0 +1,18 @@
+.horizontal-card-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20vh;
+  }
+  
+  .back-button {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .horizontal-card {
+    width: 100%;
+    /* max-width: 700px; */
+  }

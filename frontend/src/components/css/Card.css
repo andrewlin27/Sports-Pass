@@ -8,6 +8,12 @@
     text-align: center;
     margin: 16px;
     height: 33vh;
+    text-decoration: none;
+  }
+
+  .card:hover {
+    transform: translateY(-10px); /* Lift the card on hover */
+    cursor: pointer;
   }
   
   .card-date-badge {

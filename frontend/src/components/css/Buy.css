@@ -1,3 +1,8 @@
+
+
+
+
+
 .buy-container {
     display: flex;
     justify-content: center;
@@ -22,9 +27,21 @@
     width: 90%;
     max-width: 1200px; /* Optional: Limit the maximum width of the cards container */
     margin: auto; /* Center the cards horizontally within the buy-container */
+    text-decoration: none;
+  }
+
+  .card-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit color from parent */
   }
   
-  .horizontal-card-container {
+  /* Optional: Additional styling for the link when hovered */
+  .card-link:hover {
+    color: inherit; /* Ensure it doesn't change color on hover */
+    text-decoration: none; /* Ensure it doesn't underline on hover */
+  }
+  
+  /* .horizontal-card-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,11 +51,11 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(255, 255, 255, 0.9); /* Optional: Add background to emphasize modal effect */
+    background: rgba(255, 255, 255, 0.9);
     z-index: 1000;
-  }
+  } */
   
-  .back-button {
+  /* .back-button {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -57,7 +74,7 @@
   .horizontal-card-container .horizontal-card {
     max-width: 90%;
     margin: 0 auto;
-  }
+  } */
   
   
   @media (max-width: 768px) {

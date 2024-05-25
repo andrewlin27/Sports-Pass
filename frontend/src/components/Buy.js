@@ -3,6 +3,7 @@ import Card from './Card';
 import HorizontalCard from './HorizontalCard';
 import samplePosts from '../samplePosts';
 import './css/Buy.css';
+import { Link } from 'react-router-dom';
 
 const Buy = () => {
   const [selectedCard, setSelectedCard] = useState(null);
@@ -15,8 +16,14 @@ const Buy = () => {
     setSelectedCard(null);
   };
 
+  // const cards = samplePosts.map(item => (
+  //   <Card key={item.id} {...item} onClick={() => handleCardClick(item)} />
+  // ));
+
   const cards = samplePosts.map(item => (
-    <Card key={item.id} {...item} onClick={() => handleCardClick(item)} />
+    <Link key={item.id} to={`/card/${item.id}`} className="card-link">
+      <Card {...item} />
+    </Link>
   ));
 
   return (
@@ -26,11 +33,6 @@ const Buy = () => {
           {cards}
         </div>
       </div>
-      {selectedCard && (
-        <div className="horizontal-card-container">
-          <HorizontalCard {...selectedCard} onBack={handleBackClick} />
-        </div>
-      )}
     </div>
   );
 };

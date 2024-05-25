@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/Card.css';
 
-const Card = ({ id, seller, price, classification, postingDate, game, image, onClick }) => {
+const Card = ({ id, seller, price, classification, postingDate, game, image, phone, onClick }) => {
   const calculateDateDifference = (date) => {
     const postDate = new Date(date);
     const today = new Date();
