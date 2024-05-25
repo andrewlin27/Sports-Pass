@@ -9,7 +9,7 @@
     max-height: 100vh; /* Adjust this value as needed */
     overflow-y: auto; /* Enable vertical scrolling */
   }
-
+  
   .cards-container::-webkit-scrollbar {
     width: 0; /* Hide scrollbar for Chrome, Safari, and Opera */
   }
@@ -22,5 +22,53 @@
     width: 90%;
     max-width: 1200px; /* Optional: Limit the maximum width of the cards container */
     margin: auto; /* Center the cards horizontally within the buy-container */
+  }
+  
+  .horizontal-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.9); /* Optional: Add background to emphasize modal effect */
+    z-index: 1000;
+  }
+  
+  .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .back-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .horizontal-card-container .horizontal-card {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .card {
+      flex: 0 1 calc(50% - 16px); /* Two cards per row on smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .card {
+      flex: 0 1 calc(100% - 16px); /* One card per row on very small screens */
+    }
   }
   

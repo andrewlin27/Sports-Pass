@@ -7,6 +7,7 @@
     width: 300px;
     text-align: center;
     margin: 16px;
+    height: 33vh;
   }
   
   .card-date-badge {
@@ -22,11 +23,12 @@
   
   .card-img {
     width: 100%;
-    height: auto;
+    height: 70%;
+
   }
   
   .card-content {
-    padding: 16px;
+    /* padding: 16px; */
   }
   
   .card-seller {
@@ -36,7 +38,7 @@
   }
   
   .card-price {
-    margin: 8px 0 0;
+    /* margin: 8px 0 0; */
     font-size: 1.2em;
     color: #666;
   }
