@@ -18,157 +18,47 @@ const data = [
         image: "A&MLogo.jpeg"
     },
     {
-        id: 1,
-        seller: "Lebron James",
-        price: 150,
-        postingDate: "2024-05-24",
+        id: 3,
+        seller: "Adam Sandler",
+        price: 90,
+        postingDate: "2024-05-01",
+        classification: "Freshman",
+        game: "Bowling Green",
+        image: "A&MLogo.jpeg"
+    },
+    {
+        id: 4,
+        seller: "Luka Doncic",
+        price: 60,
+        postingDate: "2024-05-23",
+        classification: "Junior",
+        game: "McNeese",
+        image: "A&MLogo.jpeg"
+    },
+    {
+        id: 3,
+        seller: "Klay Thompson",
+        price: 90,
+        postingDate: "2024-05-21",
         classification: "Senior",
-        game: "Texas",
+        game: "Missouri",
         image: "A&MLogo.jpeg"
     },
-    {
-        id: 2,
-        seller: "Stephen Curry",
-        price: 110,
-        postingDate: "2024-05-11",
-        classification: "Sophomore",
-        game: "LSU",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 1,
-        seller: "Lebron James",
-        price: 150,
-        postingDate: "2024-05-24",
-        classification: "Senior",
-        game: "Texas",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 2,
-        seller: "Stephen Curry",
-        price: 110,
-        postingDate: "2024-05-11",
-        classification: "Sophomore",
-        game: "LSU",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 1,
-        seller: "Lebron James",
-        price: 150,
-        postingDate: "2024-05-24",
-        classification: "Senior",
-        game: "Texas",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 2,
-        seller: "Stephen Curry",
-        price: 110,
-        postingDate: "2024-05-11",
-        classification: "Sophomore",
-        game: "LSU",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 1,
-        seller: "Lebron James",
-        price: 150,
-        postingDate: "2024-05-24",
-        classification: "Senior",
-        game: "Texas",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 2,
-        seller: "Stephen Curry",
-        price: 110,
-        postingDate: "2024-05-11",
-        classification: "Sophomore",
-        game: "LSU",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 1,
-        seller: "Lebron James",
-        price: 150,
-        postingDate: "2024-05-24",
-        classification: "Senior",
-        game: "Texas",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 2,
-        seller: "Stephen Curry",
-        price: 110,
-        postingDate: "2024-05-11",
-        classification: "Sophomore",
-        game: "LSU",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 1,
-        seller: "Lebron James",
-        price: 150,
-        postingDate: "2024-05-24",
-        classification: "Senior",
-        game: "Texas",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 2,
-        seller: "Stephen Curry",
-        price: 110,
-        postingDate: "2024-05-11",
-        classification: "Sophomore",
-        game: "LSU",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 1,
-        seller: "Lebron James",
-        price: 150,
-        postingDate: "2024-05-24",
-        classification: "Senior",
-        game: "Texas",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 2,
-        seller: "Stephen Curry",
-        price: 110,
-        postingDate: "2024-05-11",
-        classification: "Sophomore",
-        game: "LSU",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 1,
-        seller: "Lebron James",
-        price: 150,
-        postingDate: "2024-05-24",
-        classification: "Senior",
-        game: "Texas",
-        image: "A&MLogo.jpeg"
-    },
-    {
-        id: 2,
-        seller: "Stephen Curry",
-        price: 110,
-        postingDate: "2024-05-11",
-        classification: "Sophomore",
-        game: "LSU",
-        image: "A&MLogo.jpeg"
-    }
+    
+
     
 ];
 
 const updatedData = data.map(item => {
+    // Replace spaces with underscores in the game property
+    const gameWithUnderscores = item.game.replace(/\s+/g, '_');
+
     return {
         ...item,
-        image: `${item.game}.jpeg`
+        image: `${gameWithUnderscores}.jpeg`
     };
 });
+
+
 
 export default updatedData;

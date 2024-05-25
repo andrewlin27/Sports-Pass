@@ -1,0 +1,37 @@
+.horizontal-card {
+    display: flex;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px;
+    margin: 16px;
+    cursor: pointer; /* Add pointer cursor to indicate clickability */
+  }
+  
+  .horizontal-card-img {
+    width: 50%;
+    object-fit: cover;
+  }
+  
+  .horizontal-card-content {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    padding: 16px;
+    width: 50%;
+  }
+  
+
+  
+  .horizontal-card-content p {
+    margin: 8px 0; /* Add vertical spacing */
+    font-size: 1.5em; /* Adjust font size */
+    color: #555; /* Darken text color */
+  }
+
+  .seller{
+      font-size:7vh;
+  }
+  
