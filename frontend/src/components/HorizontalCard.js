@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import './css/HorizontalCard.css';
 
-const HorizontalCard = ({ id, seller, price, classification, postingDate, game, image, onBack }) => {
+
+const HorizontalCard = ({ id, seller, price, classification, postingDate, game, image, phone, onBack }) => {
     const cardRef = useRef(null);
 
   useEffect(() => {
@@ -17,6 +18,8 @@ const HorizontalCard = ({ id, seller, price, classification, postingDate, game, 
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [onBack]);
+
+  console.log(image)
 
 
   const calculateClassification = (classification) => {
@@ -35,10 +38,11 @@ const HorizontalCard = ({ id, seller, price, classification, postingDate, game, 
   };
 
   return (
-    <div className="horizontal-card" ref={cardRef} onClick={onBack}>
-      <img src={`images/${image}`} alt={`${seller}'s product`} className="horizontal-card-img" />
+    <div className="horizontal-card" ref={cardRef}>
+      <img src={`/images/${image}`}alt={`${seller}'s product`} className="horizontal-card-img" />
       <div className="horizontal-card-content">
         <h2 className = "seller">{seller}</h2>
+        <p> Contact: {phone}</p>
         <p>Price: ${price}</p>
         <p>Game: {game}</p>
         <p>Classification: {calculateClassification(classification)}</p>

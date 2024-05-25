@@ -8,6 +8,7 @@ import Schedule from './components/Schedule';
 import Buy from './components/Buy';
 import Sell from './components/Sell';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import HorizontalCardPage from './components/HorizontalCardPage';
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/buy" element={<Buy />} />
+            <Route path="/card/:id" element={<HorizontalCardPage />} />
             <Route path="/sell" element={<Sell />} />
           </Routes>
         </CSSTransition>
