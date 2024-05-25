@@ -4,7 +4,7 @@ import './css/Sell.css';
 const Sell = () => {
     const [additionalField, setAdditionalField] = useState(
       <div className="form-group">
-        <label htmlFor="classification">Classification:</label>
+        <label htmlFor="classification">Classification<span className="required"> *</span></label>
         <select id="classification" name="classification" required>
             <option value="U1">U1</option>
             <option value="U2">U2</option>
@@ -14,34 +14,47 @@ const Sell = () => {
       </div>
     );
 
+    const [imageField, setImageField] = useState(null);
+
     const handleCategoryChange = (e) => {
         const selectedCategory = e.target.value;
 
         if (selectedCategory === 'Sports Pass') {
-            setAdditionalField(
-                <div className="form-group">
-                    <label htmlFor="classification">Classification:</label>
-                    <select id="classification" name="classification" required>
-                        <option value="U1">U1</option>
-                        <option value="U2">U2</option>
-                        <option value="U3">U3</option>
-                        <option value="U4">U4</option>
-                    </select>
-                </div>
-            );
+          setImageField(null);
+
+          setAdditionalField(
+              <div className="form-group">
+                  <label htmlFor="classification">Classification<span className="required"> *</span></label>
+                  <select id="classification" name="classification" required>
+                      <option value="U1">U1</option>
+                      <option value="U2">U2</option>
+                      <option value="U3">U3</option>
+                      <option value="U4">U4</option>
+                  </select>
+              </div>
+          );
         } 
 
-        else if (selectedCategory === 'Bicycles') {
-            setAdditionalField(null);
-        } 
-        
         else {
+          setImageField(
+            <div className="form-group">
+              <label htmlFor="photos">Photos<span className="required"> *</span></label>
+              <input type="file" id="photos" name="photos" accept="image/*" multiple required />
+            </div>
+          );
+          
+          if (selectedCategory === 'Bicycles') {
+            setAdditionalField(null);
+          } 
+          
+          else {
             setAdditionalField(
                 <div className="form-group">
-                    <label htmlFor="what-are-you-selling">What are you selling?</label>
+                    <label htmlFor="what-are-you-selling">What are you selling?<span className="required"> *</span></label>
                     <input type="text" id="what-are-you-selling" name="what-are-you-selling" required />
                 </div>
             );
+          }
         }
     };
 
@@ -50,12 +63,12 @@ const Sell = () => {
             <h1>Create New Listing</h1>
             <form>
                 <div className="form-group">
-                    <label htmlFor="name">Name:</label>
+                    <label htmlFor="name">Name<span className="required"> *</span></label>
                     <input type="text" id="name" name="name" required />
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="category">Category:</label>
+                    <label htmlFor="category">Category<span className="required"> *</span></label>
                     <select id="category" name="category" onChange={handleCategoryChange} required>
                         <option value="Sports Pass">Sports Pass</option>
                         <option value="Furniture">Furniture</option>
@@ -71,31 +84,28 @@ const Sell = () => {
                 {additionalField}
 
                 <div className="form-group">
-                    <label htmlFor="price">Price:</label>
+                    <label htmlFor="price">Price<span className="required"> *</span></label>
                     <input type="number" id="price" name="price" required />
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="description">Description:</label>
-                    <textarea id="description" name="description" rows="4" required></textarea>
+                    <textarea id="description" name="description" rows="4"></textarea>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="contact">Contact:</label>
+                    <label htmlFor="contact">Contact<span className="required"> *</span></label>
                     <input type="text" id="contact" name="contact" required />
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="password">Password:</label>
+                    <label htmlFor="password">Password<span className="required"> *</span></label>
                     <input type="password" id="password" name="password" required />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="photos">Photos:</label>
-                    <input type="file" id="photos" name="photos" accept="image/*" multiple required />
-                </div>
+                {imageField}
 
-                <button type="submit">Submit</button>
+                <button type="submit" id="submit">Submit</button>
             </form>
         </div>
     );
