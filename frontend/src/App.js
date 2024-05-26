@@ -3,12 +3,13 @@ import './App.css';
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from './components/Home';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Schedule from './components/Schedule';
+import Info from './components/Info';
 import Buy from './components/Buy';
 import Sell from './components/Sell';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import HorizontalCardPage from './components/HorizontalCardPage';
+import Map from './components/Map';
+import FAQ from './components/FAQ';
 
 
 const App = () => {
@@ -25,14 +26,15 @@ const App = () => {
         >
           <Routes location={location}>
             <Route path="/" element={<Home />} />
-            <Route path="/schedule" element={<Schedule />} />
+            <Route path="/map" element={<Map />} />
+            <Route path="/info" element={<Info />} />
+            <Route path="/faq" element={<FAQ />} />
             <Route path="/buy" element={<Buy />} />
-            <Route path="/card/:id" element={<HorizontalCardPage />} />
             <Route path="/sell" element={<Sell />} />
+            <Route path="/card/:id" element={<HorizontalCardPage />} />
           </Routes>
         </CSSTransition>
       </TransitionGroup>
-      <Footer />
     </div>
   );
 }

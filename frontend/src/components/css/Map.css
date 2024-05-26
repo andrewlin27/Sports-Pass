@@ -1,0 +1,8 @@
+.map-container {
+    display: flex;
+    justify-content: center;
+}
+
+.map-container img {
+    width: 60%;
+}

@@ -1,13 +1,13 @@
 .sell-page {
     max-width: 65%;
     margin: 0 auto;
-    margin-top: 70px;
+    margin-top: 1%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
-    overflow-y: auto; /* Fix this so it's scrollable w/o cutting off bottom */
-    max-height: calc(100vh - 140px); /* Fix this so it's scrollable w/o cutting off bottom */
+    overflow-y: auto;
+    max-height: calc(100vh - 150px); 
 }
 
 .sell-page h1 {

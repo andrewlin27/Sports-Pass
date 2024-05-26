@@ -1,19 +1,24 @@
-/* Navbar.css */
 .navbar {
     position: sticky;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: transparent; /* Fully transparent background */
+    background-color: transparent; 
     z-index: 1000; /* Ensure it is above other elements */
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 20px;
     height:3vh;
   }
 
- 
-  
+  .navbar-logo img {
+    height: 50px; /* Adjust size as needed */
+    position: absolute;
+    left: 20px; /* Adjust the left position as needed */
+    top: 20px;
+  }
+
   .navbar-list {
     list-style: none;
     display: flex;
@@ -23,7 +28,7 @@
   }
   
   .navbar-list a {
-    color: white; /* White text color for better visibility */
+    color: white; 
     text-decoration: none;
     padding: 10px;
   }
