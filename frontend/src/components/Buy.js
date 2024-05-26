@@ -1,33 +1,52 @@
 import React, { useState } from 'react';
 import Card from './Card';
-import HorizontalCard from './HorizontalCard';
 import samplePosts from '../samplePosts';
 import './css/Buy.css';
 import { Link } from 'react-router-dom';
 
 const Buy = () => {
-  const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedGames, setSelectedGames] = useState([]);
 
-  const handleCardClick = (item) => {
-    setSelectedCard(item);
+  const handleGameFilterChange = (game) => {
+    setSelectedGames(prevSelectedGames =>
+      prevSelectedGames.includes(game)
+        ? prevSelectedGames.filter(selectedGame => selectedGame !== game)
+        : [...prevSelectedGames, game]
+    );
   };
 
-  const handleBackClick = () => {
-    setSelectedCard(null);
-  };
+  const filteredPosts = selectedGames.length === 0 
+    ? samplePosts 
+    : samplePosts.filter(post => selectedGames.includes(post.game));
 
-  // const cards = samplePosts.map(item => (
-  //   <Card key={item.id} {...item} onClick={() => handleCardClick(item)} />
-  // ));
-
-  const cards = samplePosts.map(item => (
+  const cards = filteredPosts.map(item => (
     <Link key={item.id} to={`/card/${item.id}`} className="card-link">
       <Card {...item} />
     </Link>
   ));
 
+  const uniqueGames = [...new Set(samplePosts.map(post => post.game))];
+
   return (
     <div className="buy-container">
+      <div className="filter-container">
+        <div className="dropdown">
+          <button className="dropbtn">Filter</button>
+          <div className="dropdown-content">
+            {uniqueGames.map(game => (
+              <div key={game}>
+                <input 
+                  type="checkbox" 
+                  id={`filter-${game}`} 
+                  checked={selectedGames.includes(game)} 
+                  onChange={() => handleGameFilterChange(game)}
+                />
+                <label htmlFor={`filter-${game}`}>{game}</label>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
       <div className="cards-container">
         <div className="cards">
           {cards}

@@ -1,6 +1,6 @@
 /* Navbar.css */
 .navbar {
-    position: absolute;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
@@ -9,7 +9,10 @@
     display: flex;
     justify-content: center;
     padding: 20px;
+    height:3vh;
   }
+
+ 
   
   .navbar-list {
     list-style: none;

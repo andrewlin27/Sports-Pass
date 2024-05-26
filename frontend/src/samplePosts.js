@@ -48,7 +48,7 @@ const data = [
         game: "Missouri",
         image: "A&MLogo.jpeg",
         phone: "512-512-5121"
-    },
+    }
     
 
     
