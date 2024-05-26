@@ -43,9 +43,10 @@
     color: #333;
   }
   
-  .card-price {
+  .card-description {
     /* margin: 8px 0 0; */
     font-size: 1.2em;
-    color: #666;
+    color: black;
+    font-weight:bold;
   }
   

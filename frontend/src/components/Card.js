@@ -37,8 +37,8 @@ const Card = ({ id, seller, price, classification, postingDate, game, image, pho
       <div className="card-date-badge">{calculateDateDifference(postingDate)}</div>
       <img src={`images/${image}`} alt={`${seller}'s product`} className="card-img" />
       <div className="card-content">
-        <h2 className="card-description">{calculateClassification(classification)} Sports Pass</h2>
         <h2 className="card-price">${price}</h2>
+        <p className="card-description">{calculateClassification(classification)} Sports Pass</p>
       </div>
     </div>
   );
