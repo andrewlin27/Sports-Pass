@@ -2,37 +2,64 @@ import React, { useState } from 'react';
 import './css/Sell.css';
 
 const Sell = () => {
-    const [additionalField, setAdditionalField] = useState(
-      <div className="form-group">
-        <label htmlFor="classification">Classification<span className="required"> *</span></label>
-        <select id="classification" name="classification" required>
-            <option value="U1">U1</option>
-            <option value="U2">U2</option>
-            <option value="U3">U3</option>
-            <option value="U4">U4</option>
-        </select>
-      </div>
-    );
+    const [additionalField, setAdditionalField] = useState([
+        <div className="form-group">
+            <label htmlFor="classification">Classification<span className="required"> *</span></label>
+            <select id="classification" name="classification" required>
+                <option value="U1">U1</option>
+                <option value="U2">U2</option>
+                <option value="U3">U3</option>
+                <option value="U4">U4</option>
+            </select>
+        </div>,
+
+        <div className="form-group">
+            <label htmlFor="game">Game<span className="required"> *</span></label>
+            <select id="game" name="game" required>
+                <option value="Notre Dame">Notre Dame</option>
+                <option value="McNeese State">McNeese State</option>
+                <option value="Bowling Green">Bowling Green</option>
+                <option value="Missouri">Missouri</option>
+                <option value="LSU">LSU</option>
+                <option value="NM State">NM State</option>
+                <option value="Texas">Texas</option>
+            </select>
+        </div>
+    ]);
 
     const [imageField, setImageField] = useState(null);
+
 
     const handleCategoryChange = (e) => {
         const selectedCategory = e.target.value;
 
         if (selectedCategory === 'Sports Pass') {
-          setImageField(null);
+            setImageField(null);
 
-          setAdditionalField(
-              <div className="form-group">
-                  <label htmlFor="classification">Classification<span className="required"> *</span></label>
-                  <select id="classification" name="classification" required>
-                      <option value="U1">U1</option>
-                      <option value="U2">U2</option>
-                      <option value="U3">U3</option>
-                      <option value="U4">U4</option>
-                  </select>
-              </div>
-          );
+            setAdditionalField([
+                <div className="form-group">
+                    <label htmlFor="classification">Classification<span className="required"> *</span></label>
+                    <select id="classification" name="classification" required>
+                        <option value="U1">U1</option>
+                        <option value="U2">U2</option>
+                        <option value="U3">U3</option>
+                        <option value="U4">U4</option>
+                    </select>
+                </div>,
+
+                <div className="form-group">
+                    <label htmlFor="game">Game<span className="required"> *</span></label>
+                    <select id="game" name="game" required>
+                        <option value="Notre Dame">Notre Dame</option>
+                        <option value="McNeese State">McNeese State</option>
+                        <option value="Bowling Green">Bowling Green</option>
+                        <option value="Missouri">Missouri</option>
+                        <option value="LSU">LSU</option>
+                        <option value="NM State">NM State</option>
+                        <option value="Texas">Texas</option>
+                    </select>
+                </div>
+            ]);
         } 
 
         else {
