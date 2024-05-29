@@ -2,12 +2,15 @@ import json
 import boto3
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key
+from datetime import datetime, timezone
+import pytz
+
+tz = pytz.timezone('America/Chicago')
+timestamp = datetime.now(tz).strftime('%Y-%m-%d %H:%M:%S.%f')
 
 dynamodb = boto3.resource('dynamodb')
-dynamodb_table = dynamodb.Table('posts')
+dynamodb_table = dynamodb.Table('SP_posts')
 
-employee_path = '/employee'
-employees_path = '/employees'
 
 def lambda_handler(event, context):
     print('Request event: ', event)
@@ -17,17 +20,20 @@ def lambda_handler(event, context):
         http_method = event.get('httpMethod')
         path = event.get('path')
 
-        if http_method == 'GET' and path == employee_path:
-            employee_id = event['queryStringParameters']['employeeid']
-            response = get_employee(employee_id)
-        elif http_method == 'GET' and path == employees_path:
-            response = get_employees()
-        elif http_method == 'POST' and path == employee_path:
+        if http_method == 'GET':
+            if event['queryStringParameters']:
+                response = get_employee(event['queryStringParameters']['name'])
+            else:
+                response = get_employees()
+
+        elif http_method == 'POST':
             response = save_employee(json.loads(event['body']))
-        elif http_method == 'PATCH' and path == employee_path:
+
+        elif http_method == 'PATCH':
             body = json.loads(event['body'])
             response = modify_employee(body['employeeId'], body['updateKey'], body['updateValue'])
-        elif http_method == 'DELETE' and path == employee_path:
+
+        elif http_method == 'DELETE':
             body = json.loads(event['body'])
             response = delete_employee(body['employeeId'])
         else:
@@ -65,7 +71,7 @@ def scan_dynamo_records(scan_params, item_array):
         scan_params['ExclusiveStartKey'] = response['LastEvaluatedKey']
         return scan_dynamo_records(scan_params, item_array)
     else:
-        return {'employees': item_array}
+        return {'posts': item_array}
 
 def save_employee(request_body):
     try:
