@@ -1,12 +1,10 @@
 import json
 import boto3
 from botocore.exceptions import ClientError
-from boto3.dynamodb.conditions import Key
-from datetime import datetime, timezone
-import pytz
+from datetime import datetime, timedelta, timezone
 
-tz = pytz.timezone('America/Chicago')
-timestamp = datetime.now(tz).strftime('%Y-%m-%d %H:%M:%S.%f')
+# tz = pytz.timezone('America/Chicago')
+# timestamp = datetime.now(tz).strftime('%Y-%m-%d %H:%M:%S.%f')
 
 dynamodb = boto3.resource('dynamodb')
 dynamodb_table = dynamodb.Table('SP_posts')
@@ -18,16 +16,21 @@ def lambda_handler(event, context):
    
     try:
         http_method = event.get('httpMethod')
-        path = event.get('path')
 
         if http_method == 'GET':
             if event['queryStringParameters']:
-                response = get_employee(event['queryStringParameters']['name'])
+                response = get_post(event['queryStringParameters']['name'])
             else:
-                response = get_employees()
+                response = get_all_posts()
 
         elif http_method == 'POST':
-            response = save_employee(json.loads(event['body']))
+            time = datetime.now(timezone.utc)
+            cstOffset = timedelta(hours=-5)
+
+            body = json.loads(event['body'])
+            body['timestamp'] = str(time + cstOffset)[:-6]
+            
+            response = save_employee(body)
 
         elif http_method == 'PATCH':
             body = json.loads(event['body'])
@@ -45,41 +48,38 @@ def lambda_handler(event, context):
    
     return response
 
-def get_employee(employee_id):
+def get_post(employee_id):
     try:
-        response = dynamodb_table.get_item(Key={'employeeid': employee_id})
+        response = dynamodb_table.get_item(Key={'name': employee_id})
         return build_response(200, response.get('Item'))
+        
     except ClientError as e:
         print('Error:', e)
         return build_response(400, e.response['Error']['Message'])
 
-def get_employees():
+def get_all_posts():
     try:
-        scan_params = {
-            'TableName': dynamodb_table.name
-        }
-        return build_response(200, scan_dynamo_records(scan_params, []))
+        response = dynamodb_table.scan()
+        data = response.get('Items', [])
+        
+        # Continue scanning if there are more pages of data
+        while 'LastEvaluatedKey' in response:
+            response = dynamodb_table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+            data.extend(response.get('Items', []))
+        
+        return build_response(200, data)
+    
     except ClientError as e:
         print('Error:', e)
         return build_response(400, e.response['Error']['Message'])
-
-def scan_dynamo_records(scan_params, item_array):
-    response = dynamodb_table.scan(**scan_params)
-    item_array.extend(response.get('Items', []))
-   
-    if 'LastEvaluatedKey' in response:
-        scan_params['ExclusiveStartKey'] = response['LastEvaluatedKey']
-        return scan_dynamo_records(scan_params, item_array)
-    else:
-        return {'posts': item_array}
 
 def save_employee(request_body):
     try:
         dynamodb_table.put_item(Item=request_body)
         body = {
-            'Operation': 'SAVE',
+            'Item': request_body,
             'Message': 'SUCCESS',
-            'Item': request_body
+            'Operation': 'POST'
         }
         return build_response(200, body)
     except ClientError as e:
