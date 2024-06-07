@@ -1,12 +1,12 @@
 import json
 import boto3
 from botocore.exceptions import ClientError
-from boto3.dynamodb.conditions import Key
+from boto3.dynamodb.conditions import Key, Attr
 from datetime import datetime, timedelta, timezone
 
 
 dynamodb = boto3.resource('dynamodb')
-dynamodb_table = dynamodb.Table('SP_posts')
+dynamodb_table = dynamodb.Table('SP_Posts_2')
 
 
 def lambda_handler(event, context):
@@ -34,10 +34,8 @@ def lambda_handler(event, context):
             response = modify_employee(body['employeeId'], body['updateKey'], body['updateValue'])
 
         elif http_method == 'DELETE':
-            timestamp = event['queryStringParameters']['timestamp']
-            name = event['queryStringParameters']['name']
-
-            response = delete_employee(timestamp, name)
+            timestamp = event['pathParameters']['timestamp']
+            response = delete_employee(timestamp)
 
         else:
             response = build_response(404, '404 Not Found')
@@ -48,27 +46,17 @@ def lambda_handler(event, context):
    
     return response
 
-def get_posts_by_name(name):
+def get_posts_by_name(name):    
     try:
-        response = dynamodb_table.query(
-            IndexName='name-index',
-            KeyConditionExpression=Key('name').eq(name)
+        response = dynamodb_table.scan(
+            FilterExpression=Attr('name').eq(name)
         )
-        data = response.get('Items', [])
         
+        items = response.get('Items', [])
         
-        while 'LastEvaluatedKey' in response:
-            response = dynamodb_table.query(
-                IndexName='name-index',
-                KeyConditionExpression=Key('name').eq(name),
-                ExclusiveStartKey=response['LastEvaluatedKey']
-            )
-            data.extend(response.get('Items', []))
-        
-        return build_response(200, data)
-        
+        return build_response(200, items)
+    
     except ClientError as e:
-        print('Error:', e)
         return build_response(400, e.response['Error']['Message'])
     
 def get_post_by_timestamp(timestamp):
@@ -78,8 +66,11 @@ def get_post_by_timestamp(timestamp):
         )
         data = response.get('Items', [])
         
-        return build_response(200, data[0])
-    
+        if data:
+            return build_response(200, data[0])
+        else:
+            return build_response(404, {'Error': 'Item not found'})
+
     except ClientError as e:
         print('Error:', e)
         return build_response(400, e.response['Error']['Message'])
@@ -103,8 +94,11 @@ def post_post(request_body):
     try:
         time = datetime.now(timezone.utc)
         cstOffset = timedelta(hours=-5)
-        request_body['timestamp'] = str(time + cstOffset)[:-6]
+        timestamp = str(time + cstOffset)[:-6]
 
+        timestamp = timestamp.replace(" ", "T").replace(":", "-")
+        
+        request_body['timestamp'] = timestamp
         dynamodb_table.put_item(Item=request_body)
 
         return build_response(200, request_body)
@@ -131,15 +125,12 @@ def modify_employee(employee_id, update_key, update_value):
         print('Error:', e)
         return build_response(400, e.response['Error']['Message'])
 
-def delete_employee(timestamp, name):
+def delete_employee(timestamp):
     
     try:
         response = dynamodb_table.delete_item(
-            # for composite primary key, need both partition and sort key. for simple primary key, only partition key
-            # could remove name as sort key so that can use path parameter
             Key={
-                'timestamp': timestamp,
-                'name': name
+                'timestamp': timestamp
             },
             ReturnValues='ALL_OLD'
         )
@@ -154,7 +145,7 @@ def delete_employee(timestamp, name):
             return build_response(200, body)
         
         else:
-            body ={'Error': 'Item not found'}
+            body = {'Error': 'Item not found'}
 
             return build_response(404, body)
     
