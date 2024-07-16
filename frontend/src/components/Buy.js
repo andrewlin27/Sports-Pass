@@ -16,14 +16,17 @@ const Buy = () => {
   };
 
   const filteredPosts = selectedGames.length === 0 
-    ? samplePosts 
-    : samplePosts.filter(post => selectedGames.includes(post.game));
+  ? samplePosts 
+  : samplePosts.filter(post => selectedGames.includes(post.game));
 
-  const cards = filteredPosts.map(item => (
-    <Link key={item.id} to={`/card/${item.id}`} className="card-link">
-      <Card {...item} />
-    </Link>
-  ));
+const sortedFilteredPosts = [...filteredPosts].sort((a, b) => new Date(b.postingDate) - new Date(a.postingDate));
+
+const cards = sortedFilteredPosts.map(item => (
+  <Link key={item.id} to={`/card/${item.id}`} className="card-link">
+    <Card {...item} />
+  </Link>
+));
+
 
   const uniqueGames = [...new Set(samplePosts.map(post => post.game))];
 

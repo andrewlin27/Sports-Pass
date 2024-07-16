@@ -46,7 +46,9 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
   width: 100%;
-  padding: 12px 16px;
+  padding: 8px 0;
+  border-radius: 8px;
+  margin-top: 2px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -56,6 +58,7 @@
 .dropdown-content input[type="checkbox"] {
   margin-right: 10px;
 }
+
 
 .cards-container {
   flex-grow: 1;
@@ -73,10 +76,11 @@
   flex-wrap: wrap;
   gap: 16px;
   padding-top: 16px;
-  width: 90%;
-  max-width: 1200px;
+  width: 100%;
+  /* max-width: 1200px; */
   margin: auto;
   text-decoration: none;
+  padding-bottom: 10vh;
 }
 
 .card-link {
