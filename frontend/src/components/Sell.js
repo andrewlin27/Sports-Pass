@@ -1,169 +1,175 @@
-// import React, { useState } from 'react';
-import './css/Sell.css';
+import React, { useState } from "react";
+import "./css/Sell.css";
 
 const Sell = () => {
-    // const [additionalField, setAdditionalField] = useState([
-    //     <div className="form-group">
-    //         <label htmlFor="classification">Classification<span className="required"> *</span></label>
-    //         <select id="classification" name="classification" required>
-    //             <option value="U1">U1</option>
-    //             <option value="U2">U2</option>
-    //             <option value="U3">U3</option>
-    //             <option value="U4">U4</option>
-    //         </select>
-    //     </div>,
+  const [formData, setFormData] = useState({
+    name: "",
+    class: "U1",
+    game: "Notre Dame",
+    price: "",
+    contact: "",
+    password: "",
+  });
 
-    //     <div className="form-group">
-    //         <label htmlFor="game">Game<span className="required"> *</span></label>
-    //         <select id="game" name="game" required>
-    //             <option value="Notre Dame">Notre Dame</option>
-    //             <option value="McNeese State">McNeese State</option>
-    //             <option value="Bowling Green">Bowling Green</option>
-    //             <option value="Missouri">Missouri</option>
-    //             <option value="LSU">LSU</option>
-    //             <option value="NM State">NM State</option>
-    //             <option value="Texas">Texas</option>
-    //         </select>
-    //     </div>
-    // ]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-    // const [imageField, setImageField] = useState(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    const requiredKeys = [
+      "name",
+      "class",
+      "game",
+      "price",
+      "contact",
+      "password",
+    ];
+    const missingKeys = requiredKeys.filter((key) => !formData[key]);
 
-    // const handleCategoryChange = (e) => {
-    //     const selectedCategory = e.target.value;
+    if (missingKeys.length > 0) {
+      alert(`Invalid request body. Missing keys: ${missingKeys.join(", ")}`);
+      return;
+    }
 
-    //     if (selectedCategory === 'Sports Pass') {
-    //         setImageField(null);
+    try {
+      console.log(JSON.stringify(formData));
+      const response = await fetch(
+        "https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": "B5UTBWtEa84n3Mpc5hMeqa1jYvwdssvUR8qgrBU8",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
-    //         setAdditionalField([
-    //             <div className="form-group">
-    //                 <label htmlFor="classification">Classification<span className="required"> *</span></label>
-    //                 <select id="classification" name="classification" required>
-    //                     <option value="U1">U1</option>
-    //                     <option value="U2">U2</option>
-    //                     <option value="U3">U3</option>
-    //                     <option value="U4">U4</option>
-    //                 </select>
-    //             </div>,
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-    //             <div className="form-group">
-    //                 <label htmlFor="game">Game<span className="required"> *</span></label>
-    //                 <select id="game" name="game" required>
-    //                     <option value="Notre Dame">Notre Dame</option>
-    //                     <option value="McNeese State">McNeese State</option>
-    //                     <option value="Bowling Green">Bowling Green</option>
-    //                     <option value="Missouri">Missouri</option>
-    //                     <option value="LSU">LSU</option>
-    //                     <option value="NM State">NM State</option>
-    //                     <option value="Texas">Texas</option>
-    //                 </select>
-    //             </div>
-    //         ]);
-    //     } 
+      const data = await response.json();
+      console.log("Success:", data);
+      alert("Post created successfully");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error creating post");
+    }
+  };
 
-    //     else {
-    //       setImageField(
-    //         <div className="form-group">
-    //           <label htmlFor="photos">Photos<span className="required"> *</span></label>
-    //           <input type="file" id="photos" name="photos" accept="image/*" multiple onChange={handleFileChange} required />
-    //         </div>
-    //       );
-          
-    //       if (selectedCategory === 'Bicycles') {
-    //         setAdditionalField(null);
-    //       } 
-          
-    //       else {
-    //         setAdditionalField(
-    //             <div className="form-group">
-    //                 <label htmlFor="what-are-you-selling">What are you selling?<span className="required"> *</span></label>
-    //                 <input type="text" id="what-are-you-selling" name="what-are-you-selling" required />
-    //             </div>
-    //         );
-    //       }
-    //     }
-    // };
-
-    // const handleFileChange = (e) => {
-    //   if (e.target.files.length > 5) {
-    //       alert('You can only upload a maximum of 5 images');
-    //       e.target.value = null;
-    //   }
-    // };
-
-    return (
-        <div className="sell-page">
-            <h1>Create New Listing</h1>
-            <form>
-                <div className="form-group">
-                    <label htmlFor="name">Name<span className="required"> *</span></label>
-                    <input type="text" id="name" name="name" required />
-                </div>
-
-                {/* <div className="form-group">
-                    <label htmlFor="category">Category<span className="required"> *</span></label>
-                    <select id="category" name="category" onChange={handleCategoryChange} required>
-                        <option value="Sports Pass">Sports Pass</option>
-                        <option value="Furniture">Furniture</option>
-                        <option value="Tools">Tools</option>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Sports & Outdoors">Sports & Outdoors</option>
-                        <option value="Bicycles">Bicycles</option>
-                        <option value="Clothing">Clothing</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div> */}
-
-                <div className="form-group">
-                    <label htmlFor="classification">Classification<span className="required"> *</span></label>
-                    <select id="classification" name="classification" required>
-                        <option value="U1">U1</option>
-                        <option value="U2">U2</option>
-                        <option value="U3">U3</option>
-                        <option value="U4">U4</option>
-                    </select>
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="game">Game<span className="required"> *</span></label>
-                    <select id="game" name="game" required>
-                        <option value="Notre Dame">Notre Dame</option>
-                        <option value="McNeese State">McNeese State</option>
-                        <option value="Bowling Green">Bowling Green</option>
-                        <option value="Missouri">Missouri</option>
-                        <option value="LSU">LSU</option>
-                        <option value="NM State">NM State</option>
-                        <option value="Texas">Texas</option>
-                    </select>
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="price">Price<span className="required"> *</span></label>
-                    <input type="number" id="price" name="price" required />
-                </div>
-
-                {/* <div className="form-group">
-                    <label htmlFor="description">Description:</label>
-                    <textarea id="description" name="description" rows="4" placeholder='(recommended)'></textarea>
-                </div> */}
-
-                <div className="form-group">
-                    <label htmlFor="contact">Contact<span className="required"> *</span></label>
-                    <input type="text" id="contact" name="contact" required />
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="password">Password<span className="required"> *</span></label>
-                    <input type="password" id="password" name="password" placeholder='(used when deleting your post)' required />
-                </div>
-
-                {/* {imageField} */}
-
-                <button type="submit" id="submit">Submit</button>
-            </form>
+  return (
+    <div className="sell-page">
+      <h1>Create New Listing</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="name">
+            Name<span className="required"> *</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
         </div>
-    );
+
+        <div className="form-group">
+          <label htmlFor="classification">
+            Classification<span className="required"> *</span>
+          </label>
+          <select
+            id="classification"
+            name="classification"
+            value={formData.classification}
+            onChange={handleChange}
+            required
+          >
+            <option value="U1">U1</option>
+            <option value="U2">U2</option>
+            <option value="U3">U3</option>
+            <option value="U4">U4</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="game">
+            Game<span className="required"> *</span>
+          </label>
+          <select
+            id="game"
+            name="game"
+            value={formData.game}
+            onChange={handleChange}
+            required
+          >
+            <option value="Notre Dame">Notre Dame</option>
+            <option value="McNeese State">McNeese State</option>
+            <option value="Bowling Green">Bowling Green</option>
+            <option value="Missouri">Missouri</option>
+            <option value="LSU">LSU</option>
+            <option value="NM State">NM State</option>
+            <option value="Texas">Texas</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="price">
+            Price<span className="required"> *</span>
+          </label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="contact">
+            Contact<span className="required"> *</span>
+          </label>
+          <input
+            type="text"
+            id="contact"
+            name="contact"
+            value={formData.contact}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password">
+            Password<span className="required"> *</span>
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="(used when deleting your post)"
+            required
+          />
+        </div>
+
+        <button type="submit" id="submit">
+          Submit
+        </button>
+      </form>
+    </div>
+  );
 };
 
 export default Sell;
