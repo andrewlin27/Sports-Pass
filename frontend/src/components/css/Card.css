@@ -4,11 +4,14 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 20vw; /* Approximately 300 pixels in viewport width */
+  width: 20vw; /* Width of the card */
   text-align: center;
-  margin: 1.6vw; /* Approximately 16 pixels in viewport width */
-  height: 33vh; /* Approximately 33% of viewport height */
-  text-decoration: none;
+  margin: 1.6vw; /* Margin around the card */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  height: auto; /* Allow height to adjust based on content */
+  min-height: 33vh; /* Minimum height to maintain layout consistency */
+  max-height:33vh;
 }
 
 .card:hover {
@@ -18,54 +21,82 @@
 
 .card-date-badge {
   position: absolute;
-  top: 0.6vh; /* Approximately 6 pixels in viewport height */
-  left: 0.6vw; /* Approximately 6 pixels in viewport width */
+  top: 0.6vh;
+  left: 0.6vw;
   background-color: #000;
   color: #fff;
-  padding: 0.4vh 0.8vw; /* Approximately 4 pixels in viewport height and width */
-  border-radius: 1vw; /* Approximately 10 pixels in viewport width */
-  font-size: 0.8vw; /* Approximately 0.8% of viewport width */
+  padding: 0.4vh 0.8vw;
+  border-radius: 1vw;
+  font-size: 0.8vw;
+}
+
+.card-img-container {
+  position: relative;
+  width: 100%; 
+  height: 30vh;
 }
 
 .card-img {
   width: 100%;
-  height: 70%; /* 70% of the card's height */
-  object-fit: cover;
+  height: 30vh;
+  object-fit: cover; /* Ensure the image covers the container */
 }
 
 .card-content {
-  /* padding: 1.6vw; */ /* Approximately 16 pixels in viewport width */
+  /* padding: 1.6vw; */
+  display: flex;
+  flex-direction: column; /* Stack price and description vertically */
+  height: auto; /* Allow height to adjust based on content */
+  /* min-height: 12vh; Minimum height to ensure visibility */
+  box-sizing: border-box; /* Include padding in height calculation */
+  margin-bottom:1vh;
 }
 
-.card-seller {
-  margin: 0;
-  font-size: 1.5vw; /* Approximately 1.5% of viewport width */
-  color: #333;
+.card-price h2 {
+  font-size: 1.5vw;
+  margin: 0; /* Remove margin to reduce gap */
 }
 
 .card-description {
-  /* margin: 0.8vw 0 0; */ /* Approximately 8 pixels in viewport width */
-  font-size: 1.2vw; /* Approximately 1.2% of viewport width */
+  font-size: 1.2vw;
   color: black;
   font-weight: bold;
+  margin: 0; /* Remove margin to reduce gap */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis for overflow text */
+  white-space: nowrap; /* Prevent text wrapping */
 }
 
-.card-price h2{
-  font-size:1.5vw;
-}
-
+/* Responsive styles */
 @media (max-width: 768px) {
-  .card-seller,
-  .card-description,
-  .card-price h2 {
-    font-size: 3vw; /* Adjust the font size for smaller screens */
+  .card {
+    width: 45vw; /* Adjust width for medium screens */
+    /* min-height: 40vh; Adjust minimum height for consistency */
+  }
+
+  .card-price h2,
+  .card-description {
+    font-size: 3vw;
+  }
+
+  .card-img-container {
+    aspect-ratio: 16 / 9; /* Maintain consistent aspect ratio */
   }
 }
 
 @media (max-width: 480px) {
-  .card-seller,
-  .card-description,
-  .card-price h2 {
-    font-size: 4vw; /* Further adjust font size for very small screens */
+  .card {
+    width: 45vw; /* Adjust width for small screens */
+    height: 1vh;
+    /* min-height: 50vh; Adjust minimum height for consistency */
+  }
+
+  .card-price h2,
+  .card-description {
+    font-size: 4vw;
+  }
+
+  .card-img-container {
+    /* aspect-ratio: 16 / 9; Maintain consistent aspect ratio */
   }
 }

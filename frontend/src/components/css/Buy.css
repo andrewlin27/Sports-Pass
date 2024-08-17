@@ -3,7 +3,8 @@
   flex-direction: column; /* Stack filter and cards vertically */
   align-items: center; /* Center the content horizontally */
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
+  height: 100vh;
 }
 
 .filter-container {
@@ -61,7 +62,9 @@
   display: flex;
   justify-content: center; /* Center the grid within the container */
   overflow-y: auto;
-  margin-top: 20px;
+  padding-top: 20px;
+  flex:1;
+  margin-bottom: 40px;
 }
 
 .cards-container::-webkit-scrollbar {
