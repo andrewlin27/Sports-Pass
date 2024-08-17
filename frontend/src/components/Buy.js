@@ -1,20 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Card from './Card';
-import samplePosts from '../samplePosts';
 import './css/Buy.css';
 import { Link } from 'react-router-dom';
 
 const Buy = () => {
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const [selectedGames, setSelectedGames] = useState([]);
 
-  const handleGameFilterChange = (game) => {
-    setSelectedGames(prevSelectedGames =>
-      prevSelectedGames.includes(game)
-        ? prevSelectedGames.filter(selectedGame => selectedGame !== game)
-        : [...prevSelectedGames, game]
-    );
+  const fetchPosts = async () => {
+    try {
+      const response = await axios.get('https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post');
+      const data = response.data;
+
+      const updatedData = data.map((item, index) => {
+        const gameWithUnderscores = item.game.replace(/\s+/g, '_');
+
+        return {
+          id: index + 1,
+          seller: item.name,
+          price: parseFloat(item.price),
+          postingDate: item.timestamp.split('T')[0],
+          classification: item.class,
+          game: item.game,
+          image: `${gameWithUnderscores}.jpeg`,
+          phone: item.contact
+        };
+      });
+
+      setFilteredPosts(updatedData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
+<<<<<<< HEAD
   const filteredPosts = selectedGames.length === 0 
   ? samplePosts 
   : samplePosts.filter(post => selectedGames.includes(post.game));
@@ -27,8 +47,27 @@ const cards = sortedFilteredPosts.map(item => (
   </Link>
 ));
 
+=======
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
-  const uniqueGames = [...new Set(samplePosts.map(post => post.game))];
+  const handleGameFilterChange = (game) => {
+    const updatedSelectedGames = selectedGames.includes(game)
+      ? selectedGames.filter(selectedGame => selectedGame !== game)
+      : [...selectedGames, game];
+>>>>>>> main
+
+    setSelectedGames(updatedSelectedGames);
+
+    if (updatedSelectedGames.length === 0) {
+      fetchPosts();
+    } else {
+      setFilteredPosts(filteredPosts.filter(post => updatedSelectedGames.includes(post.game)));
+    }
+  };
+
+  const uniqueGames = [...new Set(filteredPosts.map(post => post.game))];
 
   return (
     <div className="buy-container">
@@ -52,7 +91,11 @@ const cards = sortedFilteredPosts.map(item => (
       </div>
       <div className="cards-container">
         <div className="cards">
-          {cards}
+          {filteredPosts.map(item => (
+            <Link key={item.id} to={`/card/${item.id}`} className="card-link">
+              <Card {...item} />
+            </Link>
+          ))}
         </div>
       </div>
     </div>
