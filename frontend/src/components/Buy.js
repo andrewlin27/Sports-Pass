@@ -5,8 +5,9 @@ import './css/Buy.css';
 import { Link } from 'react-router-dom';
 
 const Buy = () => {
-  const [filteredPosts, setFilteredPosts] = useState([]);
-  const [selectedGames, setSelectedGames] = useState([]);
+  const [posts, setPosts] = useState([]); // Original list of posts
+  const [filteredPosts, setFilteredPosts] = useState([]); // Filtered list to display
+  const [selectedGames, setSelectedGames] = useState([]); // Selected games for filtering
 
   const fetchPosts = async () => {
     try {
@@ -15,6 +16,7 @@ const Buy = () => {
 
       const updatedData = data.map((item, index) => {
         const gameWithUnderscores = item.game.replace(/\s+/g, '_');
+        console.log(gameWithUnderscores);
 
         return {
           id: index + 1,
@@ -28,26 +30,13 @@ const Buy = () => {
         };
       });
 
-      setFilteredPosts(updatedData);
+      setPosts(updatedData);
+      setFilteredPosts(updatedData); // Initialize filteredPosts with all posts
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
-<<<<<<< HEAD
-  const filteredPosts = selectedGames.length === 0 
-  ? samplePosts 
-  : samplePosts.filter(post => selectedGames.includes(post.game));
-
-const sortedFilteredPosts = [...filteredPosts].sort((a, b) => new Date(b.postingDate) - new Date(a.postingDate));
-
-const cards = sortedFilteredPosts.map(item => (
-  <Link key={item.id} to={`/card/${item.id}`} className="card-link">
-    <Card {...item} />
-  </Link>
-));
-
-=======
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -56,18 +45,18 @@ const cards = sortedFilteredPosts.map(item => (
     const updatedSelectedGames = selectedGames.includes(game)
       ? selectedGames.filter(selectedGame => selectedGame !== game)
       : [...selectedGames, game];
->>>>>>> main
 
     setSelectedGames(updatedSelectedGames);
 
     if (updatedSelectedGames.length === 0) {
-      fetchPosts();
+      setFilteredPosts(posts); // Reset to all posts if no filter is selected
     } else {
-      setFilteredPosts(filteredPosts.filter(post => updatedSelectedGames.includes(post.game)));
+      setFilteredPosts(posts.filter(post => updatedSelectedGames.includes(post.game)));
     }
   };
 
-  const uniqueGames = [...new Set(filteredPosts.map(post => post.game))];
+  // Generate the list of unique games from the original posts array
+  const uniqueGames = [...new Set(posts.map(post => post.game))];
 
   return (
     <div className="buy-container">

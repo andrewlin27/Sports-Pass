@@ -1,42 +1,39 @@
-/* Buy.css */
-
 .buy-container {
   display: flex;
+  flex-direction: column; /* Stack filter and cards vertically */
+  align-items: center; /* Center the content horizontally */
   width: 100%;
   overflow: hidden;
 }
 
 .filter-container {
-  width: 200px; /* Adjust width as needed */
+  width: 100%; /* Take full width to ensure centering */
   padding: 20px;
-  /* padding-left:6vh; */
-
+  text-align: center; /* Center the filter button */
 }
 
 .dropdown {
   position: relative;
   display: inline-block;
-  width: 100%;
+  width: auto;
 }
 
 .dropbtn {
-  width: 6vw;
-  background-color: white; /* Maroon color */
+  width: auto; /* Adapt to content */
+  background-color: white;
   color: black;
-  padding: 12px 20px; /* Adjust padding */
+  padding: 12px 20px;
   font-size: 16px;
   border: none;
   cursor: pointer;
-  border-radius: 40px; /* Add border radius for rounded corners */
-  transition: background-color 0.3s ease; /* Add transition for smooth hover effect */
-  font-weight:bold;
-  margin-left:11vh;
+  border-radius: 40px;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 .dropbtn:hover {
-  background-color: #f2f2f2; /* Light gray hover color */
+  background-color: #f2f2f2;
 }
-
 
 .dropdown-content {
   display: none;
@@ -59,12 +56,12 @@
   margin-right: 10px;
 }
 
-
 .cards-container {
-  flex-grow: 1;
-  max-height: calc(100vh - 60px); /* Adjust this value to be the height of your navbar */
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center the grid within the container */
   overflow-y: auto;
-  margin-top: 60px; /* Ensure it starts below the navbar */
+  margin-top: 20px;
 }
 
 .cards-container::-webkit-scrollbar {
@@ -72,15 +69,14 @@
 }
 
 .cards {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards per row on large screens */
   gap: 16px;
-  padding-top: 16px;
   width: 100%;
-  /* max-width: 1200px; */
-  margin: auto;
-  text-decoration: none;
+  max-width: 1200px; /* Limit the width of the grid */
+  padding-top: 16px;
   padding-bottom: 10vh;
+  justify-content: center;
 }
 
 .card-link {
@@ -93,14 +89,39 @@
   text-decoration: none;
 }
 
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row for medium screens */
+  }
+}
+
 @media (max-width: 768px) {
-  .card {
-    flex: 0 1 calc(50% - 16px);
+  .cards {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row for small screens */
+  }
+
+  .filter-container {
+    padding: 10px;
+  }
+
+  .dropbtn {
+    padding: 12px 10px;
+    font-size: 14px;
   }
 }
 
 @media (max-width: 480px) {
-  .card {
-    flex: 0 1 calc(100% - 16px);
+  .cards {
+    grid-template-columns: repeat(2, 1fr); /* Still 2 cards per row for very small screens */
+  }
+
+  .dropbtn {
+    font-size: 14px;
+    padding: 10px 5px;
+  }
+
+  .cards {
+    gap: 8px;
   }
 }

@@ -22,20 +22,20 @@ const HorizontalCard = ({ id, seller, price, classification, postingDate, game, 
   console.log(image)
 
 
-  const calculateClassification = (classification) => {
-    switch (classification) {
-      case 'Freshman':
-        return 'U1';
-      case 'Sophomore':
-        return 'U2';
-      case 'Junior':
-        return 'U3';
-      case 'Senior':
-        return 'U4';
-      default:
-        return 'Unknown'; // Optional: handle cases where the classification doesn't match any of the known values
-    }
-  };
+  // const calculateClassification = (classification) => {
+  //   switch (classification) {
+  //     case 'Freshman':
+  //       return 'U1';
+  //     case 'Sophomore':
+  //       return 'U2';
+  //     case 'Junior':
+  //       return 'U3';
+  //     case 'Senior':
+  //       return 'U4';
+  //     default:
+  //       return 'Unknown'; // Optional: handle cases where the classification doesn't match any of the known values
+  //   }
+  // };
 
   return (
     <div className="horizontal-card" ref={cardRef}>
@@ -45,7 +45,7 @@ const HorizontalCard = ({ id, seller, price, classification, postingDate, game, 
         <p> Contact: {phone}</p>
         <p>Price: ${price}</p>
         <p>Game: {game}</p>
-        <p>Classification: {calculateClassification(classification)}</p>
+        <p>Classification: {classification}</p>
       </div>
     </div>
   );
