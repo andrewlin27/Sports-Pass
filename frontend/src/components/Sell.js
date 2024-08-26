@@ -38,7 +38,7 @@ const Sell = () => {
     }
 
     try {
-      console.log(JSON.stringify(formData));
+      console.log("test" + JSON.stringify(formData));
       const response = await fetch(
         "https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post",
         {
@@ -87,8 +87,8 @@ const Sell = () => {
             Classification<span className="required"> *</span>
           </label>
           <select
-            id="classification"
-            name="classification"
+            id="class"
+            name="class"
             value={formData.classification}
             onChange={handleChange}
             required
