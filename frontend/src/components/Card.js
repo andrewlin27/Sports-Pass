@@ -3,22 +3,22 @@ import './css/Card.css';
 
 const Card = ({ id, seller, price, classification, postingDate, image, onClick }) => {
   const calculateDateDifference = (date) => {
-    const postDate = new Date(date);
+    console.log(date); // Ensure the date format is correct
+    const postDate = new Date(date + "T00:00:00"); // Parse the date string correctly
     const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set the time part to 00:00:00 for comparison
+
     const differenceInTime = today - postDate;
-    
     const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
-    console.log(classification)
-    console.log(image)
 
     if (differenceInDays === 0) {
-      return 'Posted Today';
+        return 'Posted Today';
     } else if (differenceInDays === 1) {
-      return 'Posted Yesterday';
+        return 'Posted Yesterday';
     } else {
-      return `${differenceInDays} Days Ago`;
+        return `Posted ${differenceInDays} days ago`;
     }
-  };
+};
 
   return (
     <div className="card" onClick={onClick}>
