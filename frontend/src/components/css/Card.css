@@ -1,102 +1,160 @@
+
+
+/* Card styling */
 .card {
   position: relative;
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 20vw; /* Width of the card */
+  width: 100%;
+  max-width: 300px; /* Max width to ensure cards are not too wide */
+  min-height: 300px; /* Default minimum height for larger screens */
   text-align: center;
-  margin: 1.6vw; /* Margin around the card */
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  height: auto; /* Allow height to adjust based on content */
-  min-height: 33vh; /* Minimum height to maintain layout consistency */
-  max-height:33vh;
-}
-
-.card:hover {
-  transform: translateY(-1vh); /* Lift the card on hover */
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
+/* Badge for "Posted x days ago" */
 .card-date-badge {
   position: absolute;
-  top: 0.6vh;
-  left: 0.6vw;
-  background-color: #000;
+  top: 10px; /* Adjust position from the top */
+  left: 10px; /* Adjust position from the left */
+  background-color: #007bff; /* Sleek blue badge */
   color: #fff;
-  padding: 0.4vh 0.8vw;
-  border-radius: 1vw;
-  font-size: 0.8vw;
+  padding: 4px 8px; /* Adjust padding for smaller size */
+  border-radius: 12px; /* Slightly smaller border radius */
+  font-size: 12px; /* Default font size */
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
 }
 
+/* Image container */
 .card-img-container {
+  width: 100%;
+  height: 200px; /* Default height for images on larger screens */
   position: relative;
-  width: 100%; 
-  height: 30vh;
+  overflow: hidden;
 }
 
+.card:hover {
+  transform: translateY(-8px); /* Slightly raise the card */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Enhance the shadow */
+}
+
+/* Image styling */
 .card-img {
   width: 100%;
-  height: 30vh;
-  object-fit: cover; /* Ensure the image covers the container */
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the container without distortion */
+  z-index: 1;
 }
 
+/* Content area */
 .card-content {
-  /* padding: 1.6vw; */
+  padding: 16px;
   display: flex;
-  flex-direction: column; /* Stack price and description vertically */
-  height: auto; /* Allow height to adjust based on content */
-  /* min-height: 12vh; Minimum height to ensure visibility */
-  box-sizing: border-box; /* Include padding in height calculation */
-  margin-bottom:1vh;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute space between elements */
+  height: calc(100% - 200px); /* Adjust height based on the fixed image height */
+  text-align: center;
 }
 
-.card-price h2 {
-  font-size: 1.5vw;
-  margin: 0; /* Remove margin to reduce gap */
+/* Ticket price */
+.card-price {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333; /* Dark gray for a modern look */
+  margin: 0;
 }
 
-.card-description {
-  font-size: 1.2vw;
-  color: black;
-  font-weight: bold;
-  margin: 0; /* Remove margin to reduce gap */
-  overflow: hidden; /* Hide overflow text */
-  text-overflow: ellipsis; /* Add ellipsis for overflow text */
-  white-space: nowrap; /* Prevent text wrapping */
+/* Classification field */
+.card-classification {
+  font-size: 16px;
+  color: #666; /* Slightly lighter gray */
+  background-color: #f8f9fa; /* Light gray background */
+  padding: 8px;
+  border-radius: 8px;
+  font-weight: 500;
 }
 
-/* Responsive styles */
+/* Responsive styles for mobile devices */
 @media (max-width: 768px) {
   .card {
-    width: 45vw; /* Adjust width for medium screens */
-    /* min-height: 40vh; Adjust minimum height for consistency */
-  }
-
-  .card-price h2,
-  .card-description {
-    font-size: 3vw;
+    min-height: 300px; /* Shorter height for smaller screens */
   }
 
   .card-img-container {
-    aspect-ratio: 16 / 9; /* Maintain consistent aspect ratio */
+    height: 150px; /* Shorter image height for smaller screens */
+  }
+
+  .card-content {
+    height: calc(100% - 150px); /* Adjust content height based on the new image height */
+  }
+
+  .card-price {
+    font-size: 18px; /* Slightly smaller font size for price */
+  }
+
+  .card-classification {
+    font-size: 14px; /* Slightly smaller font size for classification */
+  }
+
+  .card-date-badge {
+    top: 8px; /* Adjust position from the top */
+    left: 8px; /* Adjust position from the left */
+    padding: 4px 8px; /* Smaller padding for mobile */
+    font-size: 10px; /* Smaller font size for mobile */
   }
 }
 
 @media (max-width: 480px) {
   .card {
-    width: 45vw; /* Adjust width for small screens */
-    height: 1vh;
-    /* min-height: 50vh; Adjust minimum height for consistency */
-  }
-
-  .card-price h2,
-  .card-description {
-    font-size: 4vw;
+    min-height: 200px; /* Further shorten the card height for very small screens */
   }
 
   .card-img-container {
-    /* aspect-ratio: 16 / 9; Maintain consistent aspect ratio */
+    height: 120px; /* Further shorten image height */
+  }
+
+  .card-content {
+    height: calc(100% - 120px); /* Adjust content height based on the new image height */
+  }
+
+  .card-price {
+    font-size: 16px; /* Further adjust font size */
+  }
+
+  .card-classification {
+    font-size: 12px; /* Further adjust font size */
+  }
+
+  .card-date-badge {
+    top: 6px; /* Adjust position from the top */
+    left: 6px; /* Adjust position from the left */
+    padding: 2px 6px; /* Smaller padding for mobile */
+    font-size: 8px; /* Smaller font size for mobile */
+  }
+}
+
+/* Responsive styles with fixed breakpoints */
+@media (max-width: 1024px) {
+  .cards-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-container {
+    grid-template-columns: repeat(1, 1fr); /* 1 card per row */
   }
 }

@@ -44,9 +44,11 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
   width: 100%;
-  padding: 8px 0;
+  padding: 8px 4px;
   border-radius: 8px;
   margin-top: 2px;
+  text-align: left;
+  z-index: 3;
 }
 
 .dropdown:hover .dropdown-content {
@@ -58,29 +60,33 @@
 }
 
 .cards-container {
-  width: 100%;
   display: flex;
-  justify-content: center; /* Center the grid within the container */
-  overflow-y: auto;
-  padding-top: 20px;
-  flex:1;
-  margin-bottom: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 16px; /* Add horizontal padding to create gaps on the sides */
+  gap: 16px; /* Gap between cards */
+  overflow-x: auto;
+  box-sizing: border-box; /* Ensure padding is included in the element's total width */
+  margin: 0 auto; /* Center container horizontally */
 }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Default to 4 cards per row */
+  gap: 16px;
+  width: 100%;
+  max-width: 1200px;
+  padding-top: 16px;
+  padding-bottom: 10vh;
+  justify-content: center;
+}
+
 
 .cards-container::-webkit-scrollbar {
   width: 0;
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 cards per row on large screens */
-  gap: 16px;
-  width: 100%;
-  max-width: 1200px; /* Limit the width of the grid */
-  padding-top: 16px;
-  padding-bottom: 10vh;
-  justify-content: center;
-}
+
 
 .card-link {
   text-decoration: none;
