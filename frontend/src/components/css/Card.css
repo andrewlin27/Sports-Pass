@@ -1,71 +1,160 @@
+
+
+/* Card styling */
 .card {
   position: relative;
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 20vw; /* Approximately 300 pixels in viewport width */
+  width: 100%;
+  max-width: 300px; /* Max width to ensure cards are not too wide */
+  min-height: 300px; /* Default minimum height for larger screens */
   text-align: center;
-  margin: 1.6vw; /* Approximately 16 pixels in viewport width */
-  height: 33vh; /* Approximately 33% of viewport height */
-  text-decoration: none;
-}
-
-.card:hover {
-  transform: translateY(-1vh); /* Lift the card on hover */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
+/* Badge for "Posted x days ago" */
 .card-date-badge {
   position: absolute;
-  top: 0.6vh; /* Approximately 6 pixels in viewport height */
-  left: 0.6vw; /* Approximately 6 pixels in viewport width */
-  background-color: #000;
+  top: 10px; /* Adjust position from the top */
+  left: 10px; /* Adjust position from the left */
+  background-color: #007bff; /* Sleek blue badge */
   color: #fff;
-  padding: 0.4vh 0.8vw; /* Approximately 4 pixels in viewport height and width */
-  border-radius: 1vw; /* Approximately 10 pixels in viewport width */
-  font-size: 0.8vw; /* Approximately 0.8% of viewport width */
+  padding: 4px 8px; /* Adjust padding for smaller size */
+  border-radius: 12px; /* Slightly smaller border radius */
+  font-size: 12px; /* Default font size */
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
 }
 
+/* Image container */
+.card-img-container {
+  width: 100%;
+  height: 200px; /* Default height for images on larger screens */
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-8px); /* Slightly raise the card */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Enhance the shadow */
+}
+
+/* Image styling */
 .card-img {
   width: 100%;
-  height: 70%; /* 70% of the card's height */
-  object-fit: cover;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the container without distortion */
+  z-index: 1;
 }
 
+/* Content area */
 .card-content {
-  /* padding: 1.6vw; */ /* Approximately 16 pixels in viewport width */
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute space between elements */
+  height: calc(100% - 200px); /* Adjust height based on the fixed image height */
+  text-align: center;
 }
 
-.card-seller {
+/* Ticket price */
+.card-price {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333; /* Dark gray for a modern look */
   margin: 0;
-  font-size: 1.5vw; /* Approximately 1.5% of viewport width */
-  color: #333;
 }
 
-.card-description {
-  /* margin: 0.8vw 0 0; */ /* Approximately 8 pixels in viewport width */
-  font-size: 1.2vw; /* Approximately 1.2% of viewport width */
-  color: black;
-  font-weight: bold;
+/* Classification field */
+.card-classification {
+  font-size: 16px;
+  color: #666; /* Slightly lighter gray */
+  background-color: #f8f9fa; /* Light gray background */
+  padding: 8px;
+  border-radius: 8px;
+  font-weight: 500;
 }
 
-.card-price h2{
-  font-size:1.5vw;
-}
-
+/* Responsive styles for mobile devices */
 @media (max-width: 768px) {
-  .card-seller,
-  .card-description,
-  .card-price h2 {
-    font-size: 3vw; /* Adjust the font size for smaller screens */
+  .card {
+    min-height: 300px; /* Shorter height for smaller screens */
+  }
+
+  .card-img-container {
+    height: 150px; /* Shorter image height for smaller screens */
+  }
+
+  .card-content {
+    height: calc(100% - 150px); /* Adjust content height based on the new image height */
+  }
+
+  .card-price {
+    font-size: 18px; /* Slightly smaller font size for price */
+  }
+
+  .card-classification {
+    font-size: 14px; /* Slightly smaller font size for classification */
+  }
+
+  .card-date-badge {
+    top: 8px; /* Adjust position from the top */
+    left: 8px; /* Adjust position from the left */
+    padding: 4px 8px; /* Smaller padding for mobile */
+    font-size: 10px; /* Smaller font size for mobile */
   }
 }
 
 @media (max-width: 480px) {
-  .card-seller,
-  .card-description,
-  .card-price h2 {
-    font-size: 4vw; /* Further adjust font size for very small screens */
+  .card {
+    min-height: 200px; /* Further shorten the card height for very small screens */
+  }
+
+  .card-img-container {
+    height: 120px; /* Further shorten image height */
+  }
+
+  .card-content {
+    height: calc(100% - 120px); /* Adjust content height based on the new image height */
+  }
+
+  .card-price {
+    font-size: 16px; /* Further adjust font size */
+  }
+
+  .card-classification {
+    font-size: 12px; /* Further adjust font size */
+  }
+
+  .card-date-badge {
+    top: 6px; /* Adjust position from the top */
+    left: 6px; /* Adjust position from the left */
+    padding: 2px 6px; /* Smaller padding for mobile */
+    font-size: 8px; /* Smaller font size for mobile */
+  }
+}
+
+/* Responsive styles with fixed breakpoints */
+@media (max-width: 1024px) {
+  .cards-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-container {
+    grid-template-columns: repeat(1, 1fr); /* 1 card per row */
   }
 }
