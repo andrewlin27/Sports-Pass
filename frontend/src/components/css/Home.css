@@ -1,79 +1,70 @@
 .Home {
-    text-align: center;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    
-  }
-  
-  .Home-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    .Home-logo {
-      animation: Home-logo-spin infinite 20s linear;
-    }
-  }
-  
-  .Home-header {
-    margin-top: 40px; 
-  }
-  
-  
-  
-  
-  .Home-link {
-    color: #61dafb;
-  }
-  
-  .title {
-    font-size: 85px;
-    margin-top: 60px;
-    color: white;
-    /* -webkit-text-stroke: 1px white;
-    font-style: italic; */
-  }
-  
-  .button-container {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .btn {
-    padding: 10px 80px;
-    font-size: 16px;
-    border: 2px solid;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    
-  }
-  
-  .btn:hover{
-    background-color: maroon;
-    color: gold;
-    border-color: gold;
-  }
-  
-  .btn-buy {
-    background-color: white;
-    color: black;
-    border-color: black;
-  }
-  
-  .btn-sell {
-    background-color: black;
-    color: white;
-    border-color: white;
-  }
-  
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
 
-  
+.Home-header {
+  margin-top: 40px;
+}
 
-  
+.title {
+  font-size: 85px;
+  margin-top: 60px;
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.btn {
+  padding: 10px 80px;
+  font-size: 16px;
+  border: 2px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.btn:hover {
+  background-color: maroon;
+  color: gold;
+  border-color: gold;
+}
+
+.btn-buy {
+  background-color: white;
+  color: black;
+  border-color: black;
+}
+
+.btn-sell {
+  background-color: black;
+  color: white;
+  border-color: white;
+}
+
+/* Add CSS for the boarding pass image */
+.ticket-container {
+  margin-top: 200px; /* Adjust this margin to position the image vertically */
+  display: flex;
+  justify-content: center;
+}
+
+.ticket {
+  max-width: 40%;
+  height: auto;
+  opacity: 0.90;
+}
+.ticket:hover {
+  transform: translateY(-10px); /* Lift the image up by 10px */
+  opacity: 1; /* Make it fully opaque on hover */
+}
