@@ -8,8 +8,8 @@
 }
 
 .filter-container {
-  width: 100%; /* Take full width to ensure centering */
-  padding: 20px;
+  width: 90%; /* Take full width to ensure centering */
+  padding: 10px;
   text-align: center; /* Center the filter button */
 }
 
@@ -23,12 +23,14 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   flex-wrap: nowrap; /* Ensure items stay on one line */
+  margin-bottom: 15px;
+  max-width:600px;
 }
 
 .filter-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .filter-group label {
@@ -44,6 +46,7 @@
   background-color: #fff;
   cursor: pointer;
   transition: border-color 0.3s ease;
+  text-align:center;
 }
 
 .filter-group select:hover {
@@ -58,10 +61,17 @@
   }
 
   .filter-group select {
-    font-size: 14px; /* Adjust font size for smaller screens */
+    font-size: 10px; /* Adjust font size for smaller screens */
     padding: 6px 10px; /* Adjust padding for smaller screens */
   }
+
+  .filter-group option{
+    font-size:40px;
+  }
 }
+
+
+
 
 
 
