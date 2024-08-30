@@ -13,6 +13,59 @@
   text-align: center; /* Center the filter button */
 }
 
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-wrap: nowrap; /* Ensure items stay on one line */
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.filter-group label {
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.filter-group select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.filter-group select:hover {
+  border-color: #888;
+}
+
+/* Ensure selectors stay side by side on mobile devices */
+@media (max-width: 480px) {
+  .filter-bar {
+    gap: 8px; /* Reduce gap for smaller screens */
+    padding: 12px; /* Adjust padding for smaller screens */
+  }
+
+  .filter-group select {
+    font-size: 14px; /* Adjust font size for smaller screens */
+    padding: 6px 10px; /* Adjust padding for smaller screens */
+  }
+}
+
+
+
+
 .dropdown {
   position: relative;
   display: inline-block;
