@@ -9,7 +9,7 @@
   margin: 20px auto; /* Center the card horizontally and add more margin */
   transition: transform 0.3s ease; /* Smooth hover effect */
   cursor: pointer;
-  height: 40vh;
+  height: 40vh; /* Height is based on viewport height */
 }
 
 .horizontal-card:hover {
@@ -59,21 +59,64 @@
   color: #999; /* Lighter color for less emphasis */
 }
 
-
-/* Add responsive design */
-@media (max-width: 768px) {
+/* Add responsive design for height */
+@media (max-width: 1200px) {
   .horizontal-card {
-      flex-direction: column;
-      max-width: 100%;
-  }
-
-  .horizontal-card-img, .horizontal-card-content {
-      width: 100%;
+    max-width: 70%; /* Adjust max-width for larger screens */
+    height: 50vh; /* Adjust height for better fit */
+    min-height:200px;
   }
 
   .horizontal-card-img {
-      height: 200px; /* Set a fixed height for the image */
+    width: 50%; /* Adjust image width for larger screens */
   }
 
-  
+  .horizontal-card-content {
+    width: 50%; /* Adjust content width for larger screens */
+    text-align: center; /* Center text for better balance */
+  }
+}
+
+@media (max-width: 768px) {
+  .horizontal-card {
+    flex-direction: column;
+    max-width: 80%;
+    height: 52vh; /* Adjust height for better fit */
+    min-height:430px;
+  }
+
+  .horizontal-card-img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    max-height: 200px;
+  }
+
+  .horizontal-card-content {
+    width: 100%;
+    text-align: center; /* Center text for better readability */
+  }
+}
+
+@media (max-width: 480px) {
+  .horizontal-card {
+    height: 53vh; /* Adjust height for smaller screens */
+    min-height:420px;
+  }
+
+  .horizontal-card-content h2 {
+    font-size: 1.5em; /* Adjust font size for smaller screens */
+  }
+
+  .horizontal-card-content p {
+    font-size: 0.9em; /* Adjust font size for smaller screens */
+  }
+
+  .horizontal-card-content .price {
+    font-size: 1.2em; /* Adjust font size for smaller screens */
+  }
+
+  .horizontal-card-content {
+    width: 100%;
+    text-align: center; /* Align text to the left for better readability */
+  }
 }

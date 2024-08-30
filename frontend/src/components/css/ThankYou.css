@@ -1,0 +1,48 @@
+/* src/css/ThankYou.css */
+.thank-you-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full viewport height */
+    padding: 20px;
+    background: linear-gradient(135deg, #e0f7fa, #b9fbc0); /* Background gradient */
+    text-align: center;
+    
+  }
+  
+  .thank-you-page h1 {
+    margin-top:-100px;
+    color: #4caf50; /* Green color for success */
+    font-size: 2.5em; /* Larger font size for the heading */
+    margin-bottom: 20px; /* Space below the heading */
+    font-family: 'Arial', sans-serif; /* Clean font */
+    font-weight: bold; /* Bold text */
+    letter-spacing: 1px; /* Slight letter spacing */
+  }
+  
+  .thank-you-page p {
+    font-size: 1.2em; /* Standardize font size */
+    color: #333; /* Darker text color for contrast */
+    font-family: 'Arial', sans-serif; /* Consistent font */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+  
+  .thank-you-page .button {
+    margin-top: 20px; /* Space above the button */
+    padding: 10px 20px; /* Padding for button */
+    background-color: #4caf50; /* Match heading color */
+    color: white; /* Text color for the button */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1em; /* Font size for button text */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-transform: uppercase; /* Uppercase text */
+    transition: background-color 0.3s; /* Smooth background color transition */
+  }
+  
+  .thank-you-page .button:hover {
+    background-color: #388e3c; /* Darker green on hover */
+  }
+  

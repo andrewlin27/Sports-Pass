@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ThankYou from "./ThankYou"; // Import the ThankYou component
 import "./css/Sell.css";
 
 const Sell = () => {
@@ -10,6 +11,7 @@ const Sell = () => {
     contact: "",
     password: "",
   });
+  const [isSubmitted, setIsSubmitted] = useState(false); // State to track submission status
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,12 +59,17 @@ const Sell = () => {
 
       const data = await response.json();
       console.log("Success:", data);
-      alert("Post created successfully");
+      setIsSubmitted(true); // Set submission status to true
     } catch (error) {
       console.error("Error:", error);
       alert("Error creating post");
     }
   };
+
+  // Show the ThankYou component if the form has been submitted
+  if (isSubmitted) {
+    return <ThankYou />;
+  }
 
   return (
     <div className="sell-page">
@@ -89,7 +96,7 @@ const Sell = () => {
           <select
             id="class"
             name="class"
-            value={formData.classification}
+            value={formData.class}
             onChange={handleChange}
             required
           >

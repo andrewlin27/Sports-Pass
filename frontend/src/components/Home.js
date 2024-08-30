@@ -5,10 +5,8 @@ import './css/Home.css';
 const Home = () => {
   return (
     <div className="Home">
-      <div className="ticket-container">
-        <img src="images/ticket.jpeg" alt="Ticket" className="ticket" />
-      </div>
       <header className="Home-header">
+        <h1 className="title"> PassSwap </h1>
         <div className="button-container">
           <Link to="/buy"> <button className="btn btn-buy">Buy Now</button> </Link>
           <Link to="/sell"> <button className="btn btn-sell">Sell Now</button> </Link>

@@ -1,18 +1,34 @@
 .horizontal-card-page-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20vh;
+}
+
+.back-button {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.horizontal-card {
+  width: 100%;
+  /* max-width: 700px; */
+}
+
+/* Media Query for iPhone or similar devices */
+@media (max-width: 480px) {
+  .horizontal-card-page-container {
+    padding-top: 5vh; /* Less padding on top for smaller screens */
   }
-  
+
   .back-button {
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+    font-size: 14px; /* Smaller font size for the button */
+    padding: 8px 16px; /* Adjust padding for smaller buttons */
   }
-  
+
   .horizontal-card {
-    width: 100%;
-    /* max-width: 700px; */
+    max-width: 95%; /* Increase card width for better visibility on smaller screens */
   }
+}

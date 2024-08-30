@@ -1,39 +1,45 @@
 .navbar {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: transparent; 
-    z-index: 1000; /* Ensure it is above other elements */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    height:3vh;
-  }
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it is above other elements */
+  display: flex;
+  justify-content:center; /* Space out the left and right sections */
+  align-items: center;
+  padding: 10px 0px; /* Adjust padding as needed */
+  height: 60px; /* Adjust height if needed */
+}
 
-  .navbar-logo img {
-    height: 50px; /* Adjust size as needed */
-    position: absolute;
-    left: 20px; /* Adjust the left position as needed */
-    top: 20px;
-  }
+
+
+.navbar-logo img {
+  height: 30px; /* Adjust size as needed */
+  margin-top:-5px;
+}
+
+.navbar-list {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-list a {
+  color: white; 
+  text-decoration: none;
+  margin-top:0px;
+}
+
+.navbar-list a:hover {
+  color: maroon;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+
 
   .navbar-list {
-    list-style: none;
-    display: flex;
     gap: 20px;
-    padding: 0;
-    margin: 0;
   }
-  
-  .navbar-list a {
-    color: white; 
-    text-decoration: none;
-    padding: 10px;
-  }
-  
-  .navbar-list a:hover {
-    color:maroon;
-  }
-  
+}

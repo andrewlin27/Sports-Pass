@@ -30,6 +30,7 @@
   border-radius: 40px;
   transition: background-color 0.3s ease;
   font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .dropbtn:hover {
@@ -127,7 +128,7 @@
 
   .dropbtn {
     font-size: 14px;
-    padding: 10px 5px;
+    padding: 10px 12px;
   }
 
   .cards {

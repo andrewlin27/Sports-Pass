@@ -30,6 +30,8 @@ const Buy = () => {
         };
       });
 
+      updatedData.sort((a, b) => new Date(b.postingDate) - new Date(a.postingDate));
+
       setPosts(updatedData);
       setFilteredPosts(updatedData); // Initialize filteredPosts with all posts
     } catch (error) {
