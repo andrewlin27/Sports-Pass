@@ -15,6 +15,7 @@
 .navbar-logo img {
   height: 30px; /* Adjust size as needed */
   margin-top:-5px;
+  cursor: pointer;
 }
 
 .navbar-list {
