@@ -10,6 +10,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import HorizontalCardPage from './components/HorizontalCardPage';
 import Map from './components/Map';
 import FAQ from './components/FAQ';
+import DeletePosts from './components/DeletePosts'
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/buy" element={<Buy />} />
             <Route path="/sell" element={<Sell />} />
             <Route path="/card/:id" element={<HorizontalCardPage />} />
+            <Route path="/delete" element={<DeletePosts/>} />
           </Routes>
         </CSSTransition>
       </TransitionGroup>

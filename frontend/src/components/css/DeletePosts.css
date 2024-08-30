@@ -1,0 +1,89 @@
+.delete-posts-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Full width to center within the parent container */
+  }
+  
+  .search-bar input {
+    width: 50%; /* Adjusts the width of the search bar */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  
+  .posts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px; /* Space between grid items */
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 90vh; /* Adjust height as needed for scrolling */
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .post-item {
+    max-width:300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: black;
+    padding-bottom: 10px;
+  }
+  
+  .post-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card {
+    margin-bottom: 0px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+    box-shadow: none;
+  }
+  
+  .post-item button {
+    padding: 10px 15px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .post-item button:hover {
+    background-color: #d32f2f;
+  }
+  
+  .post-item h1 {
+    font-size: clamp(16px, 4vw, 24px);
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .posts-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 cards per row for small screens */
+    }
+}
+  

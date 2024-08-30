@@ -15,6 +15,7 @@ const Navbar = () => {
           	<img src={'images/ticketLogo.jpeg'} alt="Logo" />
         </Link>
           <li><Link to="/faq">FAQ</Link></li>
+		  <li><Link to="/delete">Delete</Link></li>
         </ul>
       </nav>
     </div>
