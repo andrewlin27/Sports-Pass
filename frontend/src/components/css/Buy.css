@@ -13,6 +13,9 @@
   text-align: center; /* Center the filter button */
 }
 
+.buy-card{
+  border-radius:12px;
+}
 .filter-bar {
   display: flex;
   justify-content: center;
@@ -148,6 +151,10 @@
 
 .cards-container::-webkit-scrollbar {
   width: 0;
+}
+
+.buy-card{
+  border-radius:12px;
 }
 
 

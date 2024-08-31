@@ -125,7 +125,7 @@ const Buy = () => {
         <div className="cards">
           {filteredPosts.map(item => (
             <Link key={item.id} to={`/card/${item.id}`} className="card-link">
-              <Card {...item} />
+              <Card className="buy-card" {...item} />
             </Link>
           ))}
         </div>

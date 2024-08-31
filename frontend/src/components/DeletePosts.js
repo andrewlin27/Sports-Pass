@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Card from './Card'; // Adjust the path if necessary
-import './css/DeletePosts.css'; // Add styles as needed
+import Card from './Card';
+import PasswordPrompt from './PasswordPrompt';
+import './css/DeletePosts.css';
 
 const DeletePosts = () => {
-  const [posts, setPosts] = useState([]); // Original list of posts
-  const [filteredPosts, setFilteredPosts] = useState([]); // Filtered posts based on search
-  const [searchQuery, setSearchQuery] = useState(''); // Search query
-  const [deletedPosts, setDeletedPosts] = useState([]); // Track deleted posts
+  const [posts, setPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [deletedPosts, setDeletedPosts] = useState([]);
+  const [showPasswordPrompt, setShowPasswordPrompt] = useState(false);
+  const [postToDelete, setPostToDelete] = useState(null);
 
-  // Fetch posts from the backend
   const fetchPosts = async () => {
     try {
       const response = await axios.get('https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post');
@@ -33,27 +35,41 @@ const DeletePosts = () => {
     }
   };
 
-  // Filter posts based on the search query
   const handleSearchChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
-    
     const filtered = posts.filter(post =>
       post.seller.toLowerCase().includes(query.toLowerCase())
     );
-
     setFilteredPosts(filtered);
   };
 
-  // Handle post deletion
-  const handleDeletePost = async (id) => {
-    try {
-      await axios.delete(`https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post/${id}`);
-      setFilteredPosts(filteredPosts.filter(post => post.id !== id));
-      setDeletedPosts([...deletedPosts, id]); // Optionally track deleted posts
-    } catch (error) {
-      console.error('Error deleting post:', error);
+  const handleDeletePost = async (password) => {
+    if (postToDelete && password === 'correct_password') { 
+      try {
+        await axios.delete(`https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post/${postToDelete.id}`);
+        setFilteredPosts(filteredPosts.filter(post => post.id !== postToDelete.id));
+        setDeletedPosts([...deletedPosts, postToDelete.id]);
+        setShowPasswordPrompt(false);
+        setPostToDelete(null);
+      } catch (error) {
+        console.error('Error deleting post:', error);
+      }
+    } else {
+      console.error('Invalid password');
+      setShowPasswordPrompt(false);
+      setPostToDelete(null);
     }
+  };
+
+  const handleShowPasswordPrompt = (post) => {
+    setPostToDelete(post);
+    setShowPasswordPrompt(true);
+  };
+
+  const handleCancel = () => {
+    setShowPasswordPrompt(false);
+    setPostToDelete(null);
   };
 
   useEffect(() => {
@@ -74,15 +90,21 @@ const DeletePosts = () => {
         {filteredPosts.length > 0 ? (
           filteredPosts.map(post => (
             <div key={post.id} className="post-item">
-              <Card {...post} />
+              <Card className="delete-card" {...post} />
               <h1> {post.seller} </h1>
-              <button onClick={() => handleDeletePost(post.id)}>Delete</button>
+              <button onClick={() => handleShowPasswordPrompt(post)}>Delete</button>
             </div>
           ))
         ) : (
           <p>No posts found</p>
         )}
       </div>
+      {showPasswordPrompt && (
+        <PasswordPrompt
+          onConfirm={handleDeletePost}
+          onCancel={handleCancel}
+        />
+      )}
     </div>
   );
 };
