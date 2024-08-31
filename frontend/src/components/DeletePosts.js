@@ -25,7 +25,9 @@ const DeletePosts = () => {
         classification: item.class,
         game: item.game,
         image: `${item.game.replace(/\s+/g, '_')}.jpeg`,
-        phone: item.contact
+        phone: item.contact,
+        password: item.password,
+        timestamp: item.timestamp // Add this to use in the delete request
       }));
 
       setPosts(updatedData);
@@ -45,9 +47,9 @@ const DeletePosts = () => {
   };
 
   const handleDeletePost = async (password) => {
-    if (postToDelete && password === 'correct_password') { 
+    if (postToDelete && password === postToDelete.password) {
       try {
-        await axios.delete(`https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post/${postToDelete.id}`);
+        await axios.delete(`https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post/${postToDelete.timestamp}`);
         setFilteredPosts(filteredPosts.filter(post => post.id !== postToDelete.id));
         setDeletedPosts([...deletedPosts, postToDelete.id]);
         setShowPasswordPrompt(false);
@@ -91,16 +93,17 @@ const DeletePosts = () => {
           filteredPosts.map(post => (
             <div key={post.id} className="post-item">
               <Card className="delete-card" {...post} />
-              <h1> {post.seller} </h1>
+              <h1>{post.seller}</h1>
               <button onClick={() => handleShowPasswordPrompt(post)}>Delete</button>
             </div>
           ))
         ) : (
-          <p>No posts found</p>
+          <p></p>
         )}
       </div>
       {showPasswordPrompt && (
         <PasswordPrompt
+          post={postToDelete}
           onConfirm={handleDeletePost}
           onCancel={handleCancel}
         />

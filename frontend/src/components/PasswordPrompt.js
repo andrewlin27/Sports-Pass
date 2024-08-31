@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import './css/PasswordPrompt.css';
 
-const PasswordPrompt = ({ onConfirm, onCancel }) => {
+const PasswordPrompt = ({ post, onConfirm, onCancel }) => {
   const [password, setPassword] = useState('');
 
   const handleConfirm = () => {
-    onConfirm(password);
+    if (password === post.password) {
+      onConfirm(password, post);  // Pass the password and post object to onConfirm
+    } else {
+      alert("Incorrect password");
+    }
   };
 
   return (
