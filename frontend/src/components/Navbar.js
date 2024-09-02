@@ -27,18 +27,18 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="/faq"
-              className={location.pathname === '/faq' ? 'active' : ''}
-            >
-              FAQ
-            </Link>
-          </li>
-          <li>
-            <Link
               to="/delete"
               className={location.pathname === '/delete' ? 'active' : ''}
             >
               Delete
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/faq"
+              className={location.pathname === '/faq' ? 'active' : ''}
+            >
+              FAQ
             </Link>
           </li>
         </ul>
