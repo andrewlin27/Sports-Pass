@@ -17,7 +17,7 @@ const FAQ = () => {
         },
         {
             question: "How do I delete my listing?",
-            answer: "You will need the password you set when creating the listing. Find your listing on the 'Buy' page, then click 'Delete post' and enter your password"
+            answer: "Find your listing on the 'Delete' page, then use the password you set when creating the listing. Contact aggiepasses@gmail.com if you forgot your password."
         },
         {
             question: "Is this allowed?",
@@ -25,7 +25,7 @@ const FAQ = () => {
         },
         {
             question: "Is this website associated with Texas A&M?",
-            answer: "No, we are not associated with Texas A&M and are not school officials. We are just Aggies who wanted to provide an easier way for students to be able to sell their sports passes on weeks when they can't make it to games."
+            answer: "No, we are not associated with Texas A&M and are not school officials. We are just Aggies who want to provide an easier way for students to buy & sell their sports passes in hopes of maximizing the attendence at every home game."
         }
     ]
     return (
