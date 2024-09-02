@@ -45,7 +45,7 @@ const HorizontalCardPage = () => {
   };
 
   if (!selectedCard) {
-    return <div>Card not found</div>;
+    return <div></div>;
   }
 
   return (
