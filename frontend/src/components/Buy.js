@@ -86,7 +86,7 @@ const Buy = () => {
 
   // Generate the list of unique games and classifications from the original posts array
   const uniqueGames = [...new Set(posts.map(post => post.game))];
-  const classifications = ['All Classifications', 'U1', 'U2', 'U3', 'U4'];
+  const classifications = ['U1', 'U2', 'U3', 'U4'];
 
   return (
     <div className="buy-container">

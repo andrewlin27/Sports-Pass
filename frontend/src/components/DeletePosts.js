@@ -50,10 +50,13 @@ const DeletePosts = () => {
     if (postToDelete && password === postToDelete.password) {
       try {
         await axios.delete(`https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post/${postToDelete.timestamp}`);
-        setFilteredPosts(filteredPosts.filter(post => post.id !== postToDelete.id));
-        setDeletedPosts([...deletedPosts, postToDelete.id]);
-        setShowPasswordPrompt(false);
-        setPostToDelete(null);
+        // setFilteredPosts(filteredPosts.filter(post => post.id !== postToDelete.id));
+        // setDeletedPosts([...deletedPosts, postToDelete.id]);
+        // setShowPasswordPrompt(false);
+        // setPostToDelete(null);
+
+        alert("Post successfully deleted");
+        window.location.reload();
       } catch (error) {
         console.error('Error deleting post:', error);
       }
