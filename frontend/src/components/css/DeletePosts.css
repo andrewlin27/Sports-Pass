@@ -1,3 +1,5 @@
+
+
 .delete-posts-container {
     padding: 20px;
     display: flex;
@@ -29,6 +31,7 @@
     max-height: 75vh; /* Adjust height as needed for scrolling */
     width: 100%;
     padding-bottom:200px;
+    padding-top:15px;
   }
   
   .post-item {
@@ -43,6 +46,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     color: black;
     padding-bottom: 10px;
+    /* max-height:400px; */
   }
   
   .post-item:hover {
@@ -82,7 +86,7 @@
     padding-bottom: 20px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 668px) {
     .posts-container {
       grid-template-columns: repeat(2, 1fr); /* 2 cards per row for small screens */
     }

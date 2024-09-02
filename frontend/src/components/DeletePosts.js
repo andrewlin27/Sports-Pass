@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from './Card';
 import PasswordPrompt from './PasswordPrompt';
+import SuccessMessage from './SuccessMessage'; // Import the SuccessMessage component
 import './css/DeletePosts.css';
 
 const DeletePosts = () => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [deletedPosts, setDeletedPosts] = useState([]);
   const [showPasswordPrompt, setShowPasswordPrompt] = useState(false);
   const [postToDelete, setPostToDelete] = useState(null);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false); // State for success message
 
   const fetchPosts = async () => {
     try {
@@ -50,13 +51,14 @@ const DeletePosts = () => {
     if (postToDelete && password === postToDelete.password) {
       try {
         await axios.delete(`https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post/${postToDelete.timestamp}`);
-        // setFilteredPosts(filteredPosts.filter(post => post.id !== postToDelete.id));
-        // setDeletedPosts([...deletedPosts, postToDelete.id]);
-        // setShowPasswordPrompt(false);
-        // setPostToDelete(null);
+        
+        // Hide the password prompt and show success message
+        setShowPasswordPrompt(false);
+        setPostToDelete(null);
+        setShowSuccessMessage(true);
 
-        alert("Post successfully deleted");
-        window.location.reload();
+        // Fetch updated posts
+        fetchPosts();
       } catch (error) {
         console.error('Error deleting post:', error);
       }
@@ -75,6 +77,10 @@ const DeletePosts = () => {
   const handleCancel = () => {
     setShowPasswordPrompt(false);
     setPostToDelete(null);
+  };
+
+  const handleCloseSuccessMessage = () => {
+    setShowSuccessMessage(false);
   };
 
   useEffect(() => {
@@ -101,7 +107,7 @@ const DeletePosts = () => {
             </div>
           ))
         ) : (
-          <p></p>
+          <p>No posts found</p>
         )}
       </div>
       {showPasswordPrompt && (
@@ -109,6 +115,12 @@ const DeletePosts = () => {
           post={postToDelete}
           onConfirm={handleDeletePost}
           onCancel={handleCancel}
+        />
+      )}
+      {showSuccessMessage && (
+        <SuccessMessage
+          message="Post successfully deleted"
+          onClose={handleCloseSuccessMessage}
         />
       )}
     </div>
