@@ -26,7 +26,7 @@
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px; /* Space between grid items */
     overflow-y: auto; /* Enable vertical scrolling */
-    max-height: 80vh; /* Adjust height as needed for scrolling */
+    max-height: 75vh; /* Adjust height as needed for scrolling */
     width: 100%;
     padding-bottom:200px;
   }
