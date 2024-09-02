@@ -21,7 +21,7 @@ const FAQ = () => {
         },
         {
             question: "Is this allowed?",
-            answer: "Yes, according to the 12th Man Foundation, as long as you do not make a profit from reselling your sports pass, it is allowed. The face value of your sports pass each home game can be found in the 'Info' tab."
+            answer: "Yes, according to the 12th Man Foundation, as long as you do not make a profit from reselling your sports pass, it is allowed. The face value of your sports pass each home game can be found in the 'Info' tab under the 'Walk-Up & Conversion' column."
         },
         {
             question: "Is this website associated with Texas A&M?",
