@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ThankYou from "./ThankYou"; // Import the ThankYou component
+import PriceAlert from "./PriceAlert"; // Import the custom PriceAlert component
 import "./css/Sell.css";
 
 const Sell = () => {
@@ -12,6 +13,17 @@ const Sell = () => {
     password: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false); // State to track submission status
+  const [alertMessage, setAlertMessage] = useState(""); // State for alert message
+
+  const maxPriceDict = {
+    "Notre Dame": 100,
+    "McNeese State": 25,
+    "Bowling Green": 25,
+    "Missouri": 50,
+    "LSU": 65,
+    "NM State": 25,
+    "Texas": 100,
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +47,17 @@ const Sell = () => {
     const missingKeys = requiredKeys.filter((key) => !formData[key]);
 
     if (missingKeys.length > 0) {
-      alert(`Invalid request body. Missing keys: ${missingKeys.join(", ")}`);
+      setAlertMessage(
+        `Invalid request body. Missing keys: ${missingKeys.join(", ")}`
+      );
+      return;
+    }
+
+    const maxPrice = maxPriceDict[formData.game];
+    if (parseFloat(formData.price) > maxPrice) {
+      setAlertMessage(
+        `Per Aggie Ticketing Rules, the price for ${formData.game} cannot exceed $${maxPrice}. Please adjust the price.`
+      );
       return;
     }
 
@@ -62,8 +84,13 @@ const Sell = () => {
       setIsSubmitted(true); // Set submission status to true
     } catch (error) {
       console.error("Error:", error);
-      alert("Error creating post");
+      setAlertMessage("Error creating post");
     }
+  };
+
+  // Close the alert
+  const handleCloseAlert = () => {
+    setAlertMessage("");
   };
 
   // Show the ThankYou component if the form has been submitted
@@ -76,13 +103,11 @@ const Sell = () => {
       <h1>Create New Listing</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="name">
-            Name<span className="required"> *</span>
-          </label>
           <input
             type="text"
             id="name"
             name="name"
+            placeholder="Name"
             value={formData.name}
             onChange={handleChange}
             required
@@ -90,9 +115,6 @@ const Sell = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="classification">
-            Classification<span className="required"> *</span>
-          </label>
           <select
             id="class"
             name="class"
@@ -108,9 +130,6 @@ const Sell = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="game">
-            Game<span className="required"> *</span>
-          </label>
           <select
             id="game"
             name="game"
@@ -129,13 +148,11 @@ const Sell = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="price">
-            Price<span className="required"> *</span>
-          </label>
           <input
             type="number"
             id="price"
             name="price"
+            placeholder="Price"
             value={formData.price}
             onChange={handleChange}
             required
@@ -143,13 +160,11 @@ const Sell = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="contact">
-            Contact<span className="required"> *</span>
-          </label>
           <input
             type="text"
             id="contact"
             name="contact"
+            placeholder="Contact"
             value={formData.contact}
             onChange={handleChange}
             required
@@ -157,16 +172,13 @@ const Sell = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">
-            Password<span className="required"> *</span>
-          </label>
           <input
             type="password"
             id="password"
             name="password"
+            placeholder="Password (used when deleting your post)"
             value={formData.password}
             onChange={handleChange}
-            placeholder="(used when deleting your post)"
             required
           />
         </div>
@@ -175,6 +187,10 @@ const Sell = () => {
           Submit
         </button>
       </form>
+
+      {alertMessage && (
+        <PriceAlert message={alertMessage} onClose={handleCloseAlert} />
+      )}
     </div>
   );
 };
