@@ -60,6 +60,7 @@
     object-fit: cover;
     border-radius: 12px;
     box-shadow: none;
+    /* max-height:300px; */
   }
   
   .post-item button {

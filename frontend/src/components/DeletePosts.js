@@ -31,8 +31,11 @@ const DeletePosts = () => {
         timestamp: item.timestamp // Add this to use in the delete request
       }));
 
-      setPosts(updatedData);
-      setFilteredPosts(updatedData);
+      // Sort posts alphabetically by seller's name
+      const sortedPosts = updatedData.sort((a, b) => a.seller.localeCompare(b.seller));
+
+      setPosts(sortedPosts);
+      setFilteredPosts(sortedPosts);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -44,7 +47,11 @@ const DeletePosts = () => {
     const filtered = posts.filter(post =>
       post.seller.toLowerCase().includes(query.toLowerCase())
     );
-    setFilteredPosts(filtered);
+
+    // Sort filtered posts alphabetically
+    const sortedFilteredPosts = filtered.sort((a, b) => a.seller.localeCompare(b.seller));
+
+    setFilteredPosts(sortedFilteredPosts);
   };
 
   const handleDeletePost = async (password) => {
@@ -107,7 +114,7 @@ const DeletePosts = () => {
             </div>
           ))
         ) : (
-          <p></p>
+          <p>No posts found</p>
         )}
       </div>
       {showPasswordPrompt && (
