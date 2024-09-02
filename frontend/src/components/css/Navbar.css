@@ -4,17 +4,15 @@
   width: 100%;
   z-index: 1000; /* Ensure it is above other elements */
   display: flex;
-  justify-content:center; /* Space out the left and right sections */
+  justify-content: center; /* Space out the left and right sections */
   align-items: center;
-  padding: 10px 0px; /* Adjust padding as needed */
+  padding: 10px 0; /* Adjust padding as needed */
   height: 60px; /* Adjust height if needed */
 }
 
-
-
 .navbar-logo img {
   height: 30px; /* Adjust size as needed */
-  margin-top:-5px;
+  margin-top: -5px;
   cursor: pointer;
 }
 
@@ -29,17 +27,23 @@
 .navbar-list a {
   color: white; 
   text-decoration: none;
-  margin-top:0px;
+  margin-top: 0;
+  padding: 10px 15px; /* Add padding to make the background block more visible */
+  border-radius: 5px; /* Optional: Add rounded corners to the background block */
+  transition: background-color 0.3s ease; /* Smooth transition for background color change */
 }
 
 .navbar-list a:hover {
   color: maroon;
 }
 
+.navbar-list a.active {
+  background-color: maroon;
+  color: white; /* Ensure text color contrasts with background */
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
-
-
   .navbar-list {
     gap: 20px;
   }

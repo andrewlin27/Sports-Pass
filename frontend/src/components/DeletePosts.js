@@ -107,7 +107,7 @@ const DeletePosts = () => {
             </div>
           ))
         ) : (
-          <p>No posts found</p>
+          <p></p>
         )}
       </div>
       {showPasswordPrompt && (
