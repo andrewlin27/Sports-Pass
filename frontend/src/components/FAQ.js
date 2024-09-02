@@ -9,7 +9,7 @@ const FAQ = () => {
         },
         {
             question: "How do I contact the website admins?",
-            answer: "Email XXX@gmail.com for inquiries regarding potential sponsorships or any other aspects of this website."
+            answer: "Email aggiepasses@gmail.com for inquiries regarding potential sponsorships or any other aspects of this website."
         },
         {
             question: "How should I ask a seller to buy their sports pass?",
