@@ -42,10 +42,10 @@ const HorizontalCard = ({ id, seller, price, classification, postingDate, game, 
       <img src={`/images/${image}`}alt={`${seller}'s product`} className="horizontal-card-img" />
       <div className="horizontal-card-content">
         <h2 className = "seller">{seller}</h2>
-        <p> Contact: {phone}</p>
-        <p>Price: ${price}</p>
-        <p>Game: {game}</p>
-        <p>Classification: {classification}</p>
+        <p><span className='label'>Contact:</span> {phone}</p>
+        <p><span className='label'>Price:</span> ${price}</p>
+        <p><span className='label'>Game:</span> {game}</p>
+        <p><span className='label'>Classification:</span> {classification}</p>
       </div>
     </div>
   );

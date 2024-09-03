@@ -44,6 +44,9 @@
   font-size: 1em; /* Standardize font size */
   color: black; /* Slightly darken text color */
   line-height: 1.5; /* Improve readability with line height */
+}
+
+.horizontal-card-content .label {
   font-weight: bold;
 }
 
