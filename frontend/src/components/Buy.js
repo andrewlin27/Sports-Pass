@@ -4,6 +4,7 @@ import Card from './Card';
 import './css/Buy.css';
 import { Link } from 'react-router-dom';
 
+
 const Buy = () => {
   const [posts, setPosts] = useState([]); // Original list of posts
   const [filteredPosts, setFilteredPosts] = useState([]); // Filtered list to display
@@ -123,11 +124,16 @@ const Buy = () => {
       </div>
       <div className="cards-container">
         <div className="cards">
-          {filteredPosts.map(item => (
+        {filteredPosts.length > 0 ?
+          (filteredPosts.map(item => (
             <Link key={item.id} to={`/card/${item.id}`} className="card-link">
               <Card className="buy-card" {...item} />
             </Link>
-          ))}
+          )))
+          :
+          <p></p>
+        }
+
         </div>
       </div>
     </div>

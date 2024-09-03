@@ -135,6 +135,7 @@
   overflow-x: auto;
   box-sizing: border-box; /* Ensure padding is included in the element's total width */
   margin: 0 auto; /* Center container horizontally */
+  transition: opacity 0.1s ease-in;
 }
 
 .cards {
