@@ -56,7 +56,7 @@ const Sell = () => {
     const maxPrice = maxPriceDict[formData.game];
     if (parseFloat(formData.price) > maxPrice) {
       setAlertMessage(
-        `Per Aggie Ticketing Rules, the resell price for ${formData.game} cannot exceed $${maxPrice}. Please adjust the price.`
+        `Per Aggie Ticketing Rules, the resell price for ${formData.game} cannot exceed $${maxPrice}. Please adjust the price and see the "Info" tab for more details.`
       );
       return;
     }
