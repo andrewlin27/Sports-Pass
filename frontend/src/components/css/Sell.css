@@ -11,6 +11,12 @@
     opacity:100%;
 }
 
+@media (max-width: 480px) {
+    .sell-page {
+        max-width: 70%;
+    }
+}
+
 .sell-page h1 {
     text-align: center;
     margin-bottom: 20px;
