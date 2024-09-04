@@ -8,7 +8,7 @@ const PasswordPrompt = ({ post, onConfirm, onCancel }) => {
     if (password === post.password) {
       onConfirm(password, post);  // Pass the password and post object to onConfirm
     } else {
-      alert("Incorrect password. Contact XXX@gmail.com if you forgot your password.");
+      alert("Incorrect password. Contact aggiepasses@gmail.com if you forgot your password.");
     }
   };
 
