@@ -31,6 +31,7 @@ const DeletePosts = () => {
         timestamp: item.timestamp // Add this to use in the delete request
       }));
 
+
       // Sort posts alphabetically by seller's name
       const sortedPosts = updatedData.sort((a, b) => a.seller.localeCompare(b.seller));
 

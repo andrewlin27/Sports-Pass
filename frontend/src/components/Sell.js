@@ -23,6 +23,7 @@ const Sell = () => {
     "LSU": 65,
     "NM State": 25,
     "Texas": 100,
+    "Arkansas": 300
   };
 
   const handleChange = (e) => {
@@ -144,6 +145,7 @@ const Sell = () => {
             <option value="LSU">LSU</option>
             <option value="NM State">NM State</option>
             <option value="Texas">Texas</option>
+            <option value="Arkansas">Arkansas</option>
           </select>
         </div>
 
