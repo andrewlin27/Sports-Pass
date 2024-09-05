@@ -116,38 +116,55 @@ const Sell = () => {
         </div>
 
         <div className="form-group">
-          <select
-            id="class"
-            name="class"
-            value={formData.class}
-            onChange={handleChange}
-            required
-          >
-            <option value="U1">U1</option>
-            <option value="U2">U2</option>
-            <option value="U3">U3</option>
-            <option value="U4">U4</option>
-          </select>
-        </div>
+  <select
+    id="game"
+    name="game"
+    value={formData.game}
+    onChange={handleChange}
+    required
+  >
+    <option value="Notre Dame">Notre Dame</option>
+    <option value="McNeese State">McNeese State</option>
+    <option value="Bowling Green">Bowling Green</option>
+    <option value="Missouri">Missouri</option>
+    <option value="LSU">LSU</option>
+    <option value="NM State">NM State</option>
+    <option value="Texas">Texas</option>
+    <option value="Arkansas">Arkansas</option>
+  </select>
+</div>
 
-        <div className="form-group">
-          <select
-            id="game"
-            name="game"
-            value={formData.game}
-            onChange={handleChange}
-            required
-          >
-            <option value="Notre Dame">Notre Dame</option>
-            <option value="McNeese State">McNeese State</option>
-            <option value="Bowling Green">Bowling Green</option>
-            <option value="Missouri">Missouri</option>
-            <option value="LSU">LSU</option>
-            <option value="NM State">NM State</option>
-            <option value="Texas">Texas</option>
-            <option value="Arkansas">Arkansas</option>
-          </select>
-        </div>
+<div className="form-group">
+  {formData.game === "Arkansas" ? (
+    <input
+      type="text"
+      id="class"
+      name="class"
+      value={formData.class || ''} // Use a separate field for section
+      onChange={handleChange}
+      className="class" // Apply the same className for consistent styling
+      placeholder="Enter Section Number"
+      required
+    />
+  ) : (
+    <select
+      id="class"
+      name="class"
+      value={formData.class}
+      onChange={handleChange}
+      className="class" // Keep the className consistent for styling
+      required
+    >
+      <option value="U1">U1</option>
+      <option value="U2">U2</option>
+      <option value="U3">U3</option>
+      <option value="U4">U4</option>
+    </select>
+  )}
+</div>
+
+
+        
 
         <div className="form-group">
           <input
