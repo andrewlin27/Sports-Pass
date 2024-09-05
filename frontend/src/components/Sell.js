@@ -28,9 +28,11 @@ const Sell = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
+  
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
+      ...(name === 'game' && value === 'Arkansas' ? { class: '' } : {}), // Reset class if game is Arkansas
     }));
   };
 
@@ -126,11 +128,11 @@ const Sell = () => {
     <option value="Notre Dame">Notre Dame</option>
     <option value="McNeese State">McNeese State</option>
     <option value="Bowling Green">Bowling Green</option>
+    <option value="Arkansas">Arkansas</option>
     <option value="Missouri">Missouri</option>
     <option value="LSU">LSU</option>
     <option value="NM State">NM State</option>
     <option value="Texas">Texas</option>
-    <option value="Arkansas">Arkansas</option>
   </select>
 </div>
 

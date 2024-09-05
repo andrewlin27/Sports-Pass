@@ -89,7 +89,7 @@ const Buy = () => {
   // Generate the list of unique games and classifications from the original posts array
   // const uniqueGames = [...new Set(posts.map(post => post.game))];
   // console.log(uniqueGames);
-  const uniqueGames = ['Notre Dame', 'McNeese State', 'Bowling Green', 'Missouri', 'LSU', 'NM State', 'Texas', 'Arkansas'];
+  const uniqueGames = ['Notre Dame', 'McNeese State', 'Bowling Green', 'Arkansas', 'Missouri', 'LSU', 'NM State', 'Texas'];
   // console.log(ug)
   const classifications = ['U1', 'U2', 'U3', 'U4'];
 
