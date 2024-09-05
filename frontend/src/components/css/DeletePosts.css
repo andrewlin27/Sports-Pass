@@ -54,7 +54,19 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   }
   
-  .card {
+  .delete-card {
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px; /* Max width to ensure cards are not too wide */
+    min-height: 300px; /* Default minimum height for larger screens */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
     /* margin-bottom: 0px; */
     height: 100%;
     object-fit: cover;

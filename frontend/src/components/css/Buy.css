@@ -147,6 +147,12 @@
   padding-top: 16px;
   padding-bottom: 20vh;
   justify-content: center;
+  transition: transform 0.3s ease; /* NEW: Add a transition effect */
+}
+
+/* Safari bug fix: Force GPU rendering to fix squished layout */
+.cards {
+  transform: translateZ(0); /* NEW: Forces GPU rendering to resolve Safari layout issues */
 }
 
 
@@ -154,9 +160,49 @@
   width: 0;
 }
 
-.buy-card{
-  border-radius:12px;
+.buy-card {
+  position: relative;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 300px; /* Max width to ensure cards are not too wide */
+  min-height: 300px; /* Default minimum height for larger screens */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border-radius: 12px;
+  width: 100%; /* NEW: Ensure the card takes up full width in its container */
+  max-width: 300px; /* NEW: Set a max-width to prevent cards from stretching too much */
+  min-height: 200px; /* NEW: Ensure a minimum height for consistency */
+  box-sizing: border-box; /* Make sure padding and borders are included in width/height calculations */
+  transform: translateZ(0); /* NEW: Similar to .cards, force GPU rendering for better layout handling */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: raiseCard 0.8s ease-out 0s 1;
 }
+
+.buy-card:hover {
+  transform: translateY(-8px); /* Slightly raise the card */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Enhance the shadow */
+}
+
+@keyframes raiseCard {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
 
 
 

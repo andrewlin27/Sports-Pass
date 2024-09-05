@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/Card.css';
 
-const Card = ({ id, seller, price, classification, postingDate, image, onClick }) => {
+const Card = ({ id, className, seller, price, classification, postingDate, image, onClick }) => {
   const calculateDateDifference = (date) => {
     console.log(date); // Ensure the date format is correct
     const postDate = new Date(date + "T00:00:00"); // Parse the date string correctly
@@ -21,7 +21,7 @@ const Card = ({ id, seller, price, classification, postingDate, image, onClick }
 };
 
   return (
-    <div className="card" onClick={onClick}>
+    <div className={className} onClick={onClick}>
       <div className="card-date-badge">{calculateDateDifference(postingDate)}</div>
       <div className="card-img-container">
         <img src={`images/${image}`} alt={`${seller}'s product`} className="card-img" />

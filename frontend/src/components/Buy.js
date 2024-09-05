@@ -123,7 +123,7 @@ const Buy = () => {
             <option value="postingDate">Posting Date</option>
             <option value="price">Price</option>
           </select>
-        </div>
+          </div>
       </div>
       <div className="cards-container">
         <div className="cards">
