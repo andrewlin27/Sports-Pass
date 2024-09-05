@@ -61,7 +61,7 @@
     overflow: hidden;
     width: 100%;
     max-width: 300px; /* Max width to ensure cards are not too wide */
-    min-height: 300px; /* Default minimum height for larger screens */
+    /* min-height: 300px; Default minimum height for larger screens */
     text-align: center;
     display: flex;
     flex-direction: column;
