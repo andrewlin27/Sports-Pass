@@ -236,6 +236,17 @@
     padding: 12px 10px;
     font-size: 14px;
   }
+
+  .buy-card:hover {
+    transform: none; /* No hover effect */
+    box-shadow: none; /* No hover shadow */
+  }
+
+  /* Apply transform on click */
+  .buy-card:active {
+    transform: translateY(-8px); /* Raise the card on click */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Add shadow on click */
+  }
 }
 
 @media (max-width: 480px) {

@@ -74,6 +74,18 @@
     box-shadow: none;
     /* max-height:300px; */
   }
+
+
+  .delete-card .card-content{
+    padding:0px 16px 0px 16px;
+  }
+  .delete-card .card-price{
+    padding-top:16px;
+  }
+
+  .delete-card .card-classification{
+    padding: 8px;
+  }
   
   .post-item button {
     padding: 10px 15px;
