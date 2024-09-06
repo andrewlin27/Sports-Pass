@@ -26,6 +26,10 @@ const FAQ = () => {
         {
             question: "Is this website associated with Texas A&M?",
             answer: "No, we are not associated with Texas A&M and are not school officials. We are just Aggies who want to provide an easier way for students to buy & sell their sports passes in hopes of maximizing the attendence at every home game."
+        },
+        {
+            question: "Why is Arkansas listed diferently?",
+            answer: "The Arkansas listings represent tickets, not sports passes. Therefore, they will contain the ticket's section number instead of a sports pass classification."
         }
     ]
     return (

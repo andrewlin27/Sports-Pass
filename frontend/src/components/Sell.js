@@ -32,9 +32,15 @@ const Sell = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
-      ...(name === 'game' && value === 'Arkansas' ? { class: '' } : {}), // Reset class if game is Arkansas
+      // Reset class if game is Arkansas, otherwise set it to "U1" by default when switching to other games
+      ...(name === 'game' && value === 'Arkansas'
+        ? { class: '' }
+        : name === 'game' && prevFormData.game === 'Arkansas'
+        ? { class: 'U1' } // Reset to "U1" if switching back from Arkansas
+        : {}),
     }));
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
