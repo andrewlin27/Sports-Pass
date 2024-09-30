@@ -3,7 +3,7 @@ import './css/Card.css';
 
 const Card = ({ id, className, seller, price, classification, postingDate, image, onClick }) => {
   const calculateDateDifference = (date) => {
-    console.log(date); // Ensure the date format is correct
+    // console.log(date); // Ensure the date format is correct
     const postDate = new Date(date + "T00:00:00"); // Parse the date string correctly
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Set the time part to 00:00:00 for comparison

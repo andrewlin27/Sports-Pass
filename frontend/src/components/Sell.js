@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ThankYou from "./ThankYou"; // Import the ThankYou component
 import PriceAlert from "./PriceAlert"; // Import the custom PriceAlert component
 import "./css/Sell.css";
+import bcrypt from "bcryptjs";
 
 const Sell = () => {
   const [formData, setFormData] = useState({
@@ -70,8 +71,14 @@ const Sell = () => {
       return;
     }
 
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(formData.password, salt);
+    const updatedFormData = {
+      ...formData,
+      password: hashedPassword
+    }
+
     try {
-      console.log("test" + JSON.stringify(formData));
       const response = await fetch(
         "https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post",
         {
@@ -80,7 +87,7 @@ const Sell = () => {
             "Content-Type": "application/json",
             "x-api-key": "B5UTBWtEa84n3Mpc5hMeqa1jYvwdssvUR8qgrBU8",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(updatedFormData)
         }
       );
 
