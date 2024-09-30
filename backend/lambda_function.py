@@ -184,6 +184,10 @@ def post_post(request_body):
         if len(name.split(" ")) > 4 or len(name) > 22:
             return build_response(400, "Invalid name", cors=True)
         
+        password = request_body['password']
+        if len(password) > 12:
+            return build_response(400, "Invalid password", cors=True)
+        
         print("creating post request")
         time = datetime.now(timezone.utc)
         cstOffset = timedelta(hours=-5)
