@@ -36,7 +36,10 @@ def lambda_handler(event, context):
 
         elif http_method == 'DELETE':
             timestamp = event['pathParameters']['timestamp']
-            response = delete_employee(timestamp)
+            body = json.loads(event['body'])
+            input_password = body['password']
+
+            response = delete_employee(timestamp, input_password)
 
         else:
             response = build_response(404, '404 Not Found', cors=True)
@@ -82,6 +85,9 @@ def get_all_posts():
         while 'LastEvaluatedKey' in response:
             response = dynamodb_table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
             data.extend(response.get('Items', []))
+
+        for item in data:
+            item.pop('password', None)
 
         return build_response(200, data, cors=True)
 
@@ -158,7 +164,7 @@ def post_post(request_body):
 #         print('Error:', e)
 #         return build_response(400, e.response['Error']['Message'], cors=True)
 
-def delete_employee(timestamp):
+def delete_employee(timestamp, input_password):
     try:
         query = dynamodb_table.query(
             KeyConditionExpression=Key('timestamp').eq(timestamp)
@@ -169,6 +175,9 @@ def delete_employee(timestamp):
             return build_response(404, {'error': 'Item not found'}, cors=True)
         
         name = data[0]['name']
+        password = data[0]['password']
+        if password != input_password:
+            return build_response(403, {'error': 'Invalid password'}, cors=True)
         
         dynamodb_table.delete_item(
             Key={

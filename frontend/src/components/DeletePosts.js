@@ -4,7 +4,6 @@ import Card from './Card';
 import PasswordPrompt from './PasswordPrompt';
 import SuccessMessage from './SuccessMessage'; // Import the SuccessMessage component
 import './css/DeletePosts.css';
-import bcrypt from 'bcryptjs';
 
 const DeletePosts = () => {
   const [posts, setPosts] = useState([]);
@@ -56,27 +55,14 @@ const DeletePosts = () => {
     setFilteredPosts(sortedFilteredPosts);
   };
 
-  const handleDeletePost = async (password) => {
-    const match = await bcrypt.compare(password, postToDelete.password);
-    if (match) {
-      try {
-        await axios.delete(`https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post/${postToDelete.timestamp}`);
-        
-        // Hide the password prompt and show success message
-        setShowPasswordPrompt(false);
-        setPostToDelete(null);
-        setShowSuccessMessage(true);
+  const handleDeletePost = async () => {
+    // Hide the password prompt and show success message
+    setShowPasswordPrompt(false);
+    setPostToDelete(null);
+    setShowSuccessMessage(true);
 
-        // Fetch updated posts
-        fetchPosts();
-      } catch (error) {
-        console.error('Error deleting post:', error);
-      }
-    } else {
-      console.error('Invalid password');
-      setShowPasswordPrompt(false);
-      setPostToDelete(null);
-    }
+    // Fetch updated posts
+    fetchPosts();
   };
 
   const handleShowPasswordPrompt = (post) => {

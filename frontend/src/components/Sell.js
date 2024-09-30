@@ -71,13 +71,6 @@ const Sell = () => {
       return;
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(formData.password, salt);
-    const updatedFormData = {
-      ...formData,
-      password: hashedPassword
-    }
-
     try {
       const response = await fetch(
         "https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post",
@@ -87,7 +80,7 @@ const Sell = () => {
             "Content-Type": "application/json",
             "x-api-key": "B5UTBWtEa84n3Mpc5hMeqa1jYvwdssvUR8qgrBU8",
           },
-          body: JSON.stringify(updatedFormData)
+          body: JSON.stringify(formData)
         }
       );
 
@@ -215,7 +208,6 @@ const Sell = () => {
             onChange={handleChange}
             required
           />
-          <p><b>*Disclaimer:</b> Please do not use your actual personal password. Choose a unique password specifically for this website.</p>
         </div>
 
         <button type="submit" id="submit">
