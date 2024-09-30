@@ -6,8 +6,8 @@ const ThankYou = () => {
   return (
       <div className = "outerDiv">
     <div className="thank-you-page">
-      <h1>Success!</h1>
-      <p>Your listing has been created.</p>
+      <h1>Under review!</h1>
+      <p>Your listing is under review and will appear within 12 hours if approved.</p>
       <button className="button" onClick={() => window.location.href = '/'}>Go to Home</button>
     </div>
     </div>

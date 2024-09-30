@@ -23,12 +23,18 @@ def lambda_handler(event, context):
                     response = get_posts_by_name(event['queryStringParameters']['name'])
                 elif 'timestamp' in event['queryStringParameters']:
                     response = get_post_by_timestamp(event['queryStringParameters']['timestamp'])
+                elif 'all' in event['queryStringParameters']:
+                    response = get_all_posts()
             else:
-                response = get_all_posts()
+                response = get_all_approved_posts()
 
         elif http_method == 'POST':
-            body = json.loads(event['body'])
-            response = post_post(body)
+            if event['queryStringParameters']:
+                timestamp = event['queryStringParameters']['timestamp']
+                response = approve_post(timestamp)
+            else:
+                body = json.loads(event['body'])
+                response = post_post(body)
 
         # elif http_method == 'PATCH':
         #     body = json.loads(event['body'])
@@ -94,6 +100,29 @@ def get_all_posts():
     except ClientError as e:
         print('Error:', e)
         return build_response(400, e.response['Error']['Message'], cors=True)
+    
+def get_all_approved_posts():
+    try:
+        response = dynamodb_table.scan(
+            FilterExpression=Attr('approved').eq(True) 
+        )
+        data = response.get('Items', [])
+
+        while 'LastEvaluatedKey' in response:
+            response = dynamodb_table.scan(
+                ExclusiveStartKey=response['LastEvaluatedKey'],
+                FilterExpression=Attr('approved').eq(True)
+            )
+            data.extend(response.get('Items', []))
+
+        for item in data:
+            item.pop('password', None)
+
+        return build_response(200, data, cors=True)
+
+    except ClientError as e:
+        return build_response(400, e.response['Error']['Message'], cors=True)
+
 
 def valid_post(request_body):
     required_keys = {"name", "class", "game", "price", "contact", "password"}
@@ -104,6 +133,34 @@ def valid_post(request_body):
         return False
     
     return True
+
+def approve_post(timestamp):
+    try:
+        response = dynamodb_table.query(
+            KeyConditionExpression=Key('timestamp').eq(timestamp)
+        )
+        
+        items = response.get('Items', [])
+        if not items:
+            return build_response(404, "Post not found", cors=True)
+
+        name = items[0]['name']
+
+        dynamodb_table.update_item(
+            Key={
+                'timestamp': timestamp,
+                'name': name
+            },
+            UpdateExpression="SET approved = :approved",
+            ExpressionAttributeValues={
+                ':approved': True
+            }
+        )
+
+        return build_response(200, "Post approved", cors=True)
+
+    except ClientError as e:
+        return build_response(400, e.response['Error']['Message'], cors=True)
 
 def post_post(request_body):
     try:
@@ -139,6 +196,8 @@ def post_post(request_body):
             return build_response(400, "invalid request body", cors=True)
         
         request_body['timestamp'] = timestamp
+        request_body['approved'] = False
+
         dynamodb_table.put_item(Item=request_body)
         return build_response(200, request_body, cors=True)
     
