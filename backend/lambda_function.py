@@ -30,7 +30,7 @@ def lambda_handler(event, context):
 
         elif http_method == 'POST':
             if event['queryStringParameters']:
-                timestamp = event['queryStringParameters']['timestamp']
+                timestamp = event['queryStringParameters']['xtimestampx']
                 response = approve_post(timestamp)
             else:
                 body = json.loads(event['body'])
