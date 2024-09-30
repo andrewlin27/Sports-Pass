@@ -101,6 +101,18 @@ def valid_post(request_body):
 
 def post_post(request_body):
     try:
+        allowed_games = ["Notre Dame","McNeese State","Bowling Green","Arkansas","Missouri","LSU","NM State","Texas"]
+        if request_body['game'] not in allowed_games:
+            return build_response(400, "Invalid game", cors=True)
+        
+        allowed_class = ["U1","U2","U3","U4"]
+        if request_body['class'] not in allowed_class:
+            return build_response(400, "Invalid class", cors=True)
+        
+        price = float(request_body['price'])
+        if len(str(price)) > 7: # max length '-888.88'
+            return build_response(400, "Invalid price", cors=True)
+        
         print("creating post request")
         time = datetime.now(timezone.utc)
         cstOffset = timedelta(hours=-5)
