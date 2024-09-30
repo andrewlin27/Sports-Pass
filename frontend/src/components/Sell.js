@@ -215,6 +215,7 @@ const Sell = () => {
             onChange={handleChange}
             required
           />
+          <p><b>*Disclaimer:</b> Please do not use your actual personal password. Choose a unique password specifically for this website.</p>
         </div>
 
         <button type="submit" id="submit">
