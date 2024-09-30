@@ -27,14 +27,14 @@ const App = () => {
           classNames="fade"
         >
           <Routes location={location}>
-            <Route path="/" element={<Home />} />
-            <Route path="/map" element={<Map />} />
-            <Route path="/info" element={<Info />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/buy" element={<Buy />} />
-            <Route path="/sell" element={<Sell />} />
-            <Route path="/card/:id" element={<HorizontalCardPage />} />
-            <Route path="/delete" element={<DeletePosts/>} />
+            <Route path="/" element={<Maintenance />} />
+            <Route path="/maps" element={<Map />} />
+            <Route path="/infos" element={<Info />} />
+            <Route path="/faqs" element={<FAQ />} />
+            <Route path="/buys" element={<Buy />} />
+            <Route path="/sells" element={<Sell />} />
+            <Route path="/card/:ids" element={<HorizontalCardPage />} />
+            <Route path="/deletes" element={<DeletePosts/>} />
           </Routes>
         </CSSTransition>
       </TransitionGroup>
