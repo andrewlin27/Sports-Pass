@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ThankYou from "./ThankYou"; // Import the ThankYou component
 import PriceAlert from "./PriceAlert"; // Import the custom PriceAlert component
 import "./css/Sell.css";
-import bcrypt from "bcryptjs";
 
 const Sell = () => {
   const [formData, setFormData] = useState({
