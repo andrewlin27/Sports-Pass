@@ -4,6 +4,7 @@ import Card from './Card';
 import PasswordPrompt from './PasswordPrompt';
 import SuccessMessage from './SuccessMessage'; // Import the SuccessMessage component
 import './css/DeletePosts.css';
+import bcrypt from 'bcryptjs';
 
 const DeletePosts = () => {
   const [posts, setPosts] = useState([]);
@@ -55,7 +56,8 @@ const DeletePosts = () => {
   };
 
   const handleDeletePost = async (password) => {
-    if (postToDelete && password === postToDelete.password) {
+    const match = await bcrypt.compare(password, postToDelete.password);
+    if (match) {
       try {
         await axios.delete(`https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post/${postToDelete.timestamp}`);
         
