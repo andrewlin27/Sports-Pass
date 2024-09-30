@@ -110,8 +110,16 @@ def post_post(request_body):
             return build_response(400, "Invalid class", cors=True)
         
         price = float(request_body['price'])
-        if len(str(price)) > 7: # max length '-888.88'
+        if price > 400 or price < -400 or len(str(price)) > 7: # max length '-888.88'
             return build_response(400, "Invalid price", cors=True)
+        
+        contact = request_body['contact']
+        if len(contact.split(" ")) > 4 or len(contact) > 22:
+            return build_response(400, "Invalid contact", cors=True)
+        
+        name = request_body['name']
+        if len(name.split(" ")) > 4 or len(name) > 22:
+            return build_response(400, "Invalid name", cors=True)
         
         print("creating post request")
         time = datetime.now(timezone.utc)
