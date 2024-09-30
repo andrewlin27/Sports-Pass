@@ -8,7 +8,7 @@ const Maintenance = () => {
       <h1 className="maintenance-title">Website Under Maintenance</h1>
       <p className="maintenance-message">
         Our site is currently undergoing maintenance to add updates. <br />
-        We will be back at midnight. Thank you for your patience!
+        We will be back during the day on 9/30. Thank you for your patience!
       </p>
     </div>
   );
