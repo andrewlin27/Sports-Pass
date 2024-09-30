@@ -81,7 +81,7 @@ const Buy = () => {
     } else {
       sortedPosts = filtered;
     }
-    console.log(sortedPosts);
+    
 
     setFilteredPosts(sortedPosts);
   };
