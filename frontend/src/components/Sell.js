@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import ThankYou from "./ThankYou"; // Import the ThankYou component
 import PriceAlert from "./PriceAlert"; // Import the custom PriceAlert component
 import "./css/Sell.css";
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3"; // Import reCAPTCHA v3 components
 
-const Sell = () => {
+const SellForm = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha(); // Access the executeRecaptcha function
   const [formData, setFormData] = useState({
     name: "",
     class: "U1",
@@ -23,27 +25,38 @@ const Sell = () => {
     "LSU": 65,
     "NM State": 25,
     "Texas": 100,
-    "Arkansas": 300
+    "Arkansas": 300,
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
-      // Reset class if game is Arkansas, otherwise set it to "U1" by default when switching to other games
-      ...(name === 'game' && value === 'Arkansas'
-        ? { class: '' }
-        : name === 'game' && prevFormData.game === 'Arkansas'
-        ? { class: 'U1' } // Reset to "U1" if switching back from Arkansas
+      ...(name === "game" && value === "Arkansas"
+        ? { class: "" }
+        : name === "game" && prevFormData.game === "Arkansas"
+        ? { class: "U1" } // Reset to "U1" if switching back from Arkansas
         : {}),
     }));
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!executeRecaptcha) {
+      setAlertMessage("reCAPTCHA not yet available");
+      return;
+    }
+
+    // Execute reCAPTCHA v3 verification
+    const captchaToken = await executeRecaptcha("sell_form_submit");
+
+    if (!captchaToken) {
+      setAlertMessage("CAPTCHA verification failed. Please try again.");
+      return;
+    }
 
     const requiredKeys = [
       "name",
@@ -79,7 +92,10 @@ const Sell = () => {
             "Content-Type": "application/json",
             "x-api-key": "B5UTBWtEa84n3Mpc5hMeqa1jYvwdssvUR8qgrBU8",
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify({
+            ...formData,
+            captchaToken, // Send captcha token to the backend
+          }),
         }
       );
 
@@ -123,55 +139,52 @@ const Sell = () => {
         </div>
 
         <div className="form-group">
-  <select
-    id="game"
-    name="game"
-    value={formData.game}
-    onChange={handleChange}
-    required
-  >
-    <option value="Notre Dame">Notre Dame</option>
-    <option value="McNeese State">McNeese State</option>
-    <option value="Bowling Green">Bowling Green</option>
-    <option value="Arkansas">Arkansas</option>
-    <option value="Missouri">Missouri</option>
-    <option value="LSU">LSU</option>
-    <option value="NM State">NM State</option>
-    <option value="Texas">Texas</option>
-  </select>
-</div>
+          <select
+            id="game"
+            name="game"
+            value={formData.game}
+            onChange={handleChange}
+            required
+          >
+            <option value="Notre Dame">Notre Dame</option>
+            <option value="McNeese State">McNeese State</option>
+            <option value="Bowling Green">Bowling Green</option>
+            <option value="Arkansas">Arkansas</option>
+            <option value="Missouri">Missouri</option>
+            <option value="LSU">LSU</option>
+            <option value="NM State">NM State</option>
+            <option value="Texas">Texas</option>
+          </select>
+        </div>
 
-<div className="form-group">
-  {formData.game === "Arkansas" ? (
-    <input
-      type="text"
-      id="class"
-      name="class"
-      value={formData.class || ''} // Use a separate field for section
-      onChange={handleChange}
-      className="class" // Apply the same className for consistent styling
-      placeholder="Enter Section Number"
-      required
-    />
-  ) : (
-    <select
-      id="class"
-      name="class"
-      value={formData.class}
-      onChange={handleChange}
-      className="class" // Keep the className consistent for styling
-      required
-    >
-      <option value="U1">U1</option>
-      <option value="U2">U2</option>
-      <option value="U3">U3</option>
-      <option value="U4">U4</option>
-    </select>
-  )}
-</div>
-
-
-        
+        <div className="form-group">
+          {formData.game === "Arkansas" ? (
+            <input
+              type="text"
+              id="class"
+              name="class"
+              value={formData.class || ""} // Use a separate field for section
+              onChange={handleChange}
+              className="class" // Apply the same className for consistent styling
+              placeholder="Enter Section Number"
+              required
+            />
+          ) : (
+            <select
+              id="class"
+              name="class"
+              value={formData.class}
+              onChange={handleChange}
+              className="class" // Keep the className consistent for styling
+              required
+            >
+              <option value="U1">U1</option>
+              <option value="U2">U2</option>
+              <option value="U3">U3</option>
+              <option value="U4">U4</option>
+            </select>
+          )}
+        </div>
 
         <div className="form-group">
           <input
@@ -220,5 +233,11 @@ const Sell = () => {
     </div>
   );
 };
+
+const Sell = () => (
+  <GoogleReCaptchaProvider reCaptchaKey="6LeV81IqAAAAAN1z1OmNUcNZp1J3FSgtS3rKMm6T">
+    <SellForm />
+  </GoogleReCaptchaProvider>
+);
 
 export default Sell;
