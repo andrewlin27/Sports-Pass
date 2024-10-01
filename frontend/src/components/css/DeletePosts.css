@@ -46,7 +46,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     color: black;
     padding-bottom: 10px;
-    /* max-height:400px; */
+    max-height:390px;
   }
   
   .post-item:hover {
