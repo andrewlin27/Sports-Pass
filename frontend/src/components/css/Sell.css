@@ -1,19 +1,56 @@
 .sell-page {
-    max-width: 50%;
+    max-width: 80%;
     margin: 0 auto;
     margin-top: 2%;
-    padding: 30px;
+    padding: 40px;
     border-radius: 10px;
     background-color: #f5f5f5;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     color: #333;
-    height: 100%;
-    opacity:100%;
+    max-height: 80vh; /* Set a maximum height for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 @media (max-width: 480px) {
     .sell-page {
-        max-width: 70%;
+        max-width: 90%; /* Adjust max-width for smaller screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column; /* Stack form fields vertically */
+    padding: 10px;
+}
+
+
+
+#submit:hover {
+    background-color: #45a049; /* Button hover effect */
+}
+
+
+@media (max-width: 480px) {
+    .sell-page {
+        max-width: 90%; /* Adjust max-width for smaller screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+}
+
+/* Keep other CSS rules unchanged */
+
+
+@media (max-width: 480px) {
+    .sell-page {
+        max-width: 90%; /* Adjust max-width for smaller screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .sell-page {
+        max-width: 80%;
     }
 }
 
