@@ -5,7 +5,7 @@ from boto3.dynamodb.conditions import Key, Attr
 from datetime import datetime, timedelta, timezone
 import requests
 
-RECAPTCHA_SECRET_KEY = '6LeV81IqAAAAAN1z1OmNUcNZp1J3FSgtS3rKMm6T'
+RECAPTCHA_SECRET_KEY = ''
 
 dynamodb = boto3.resource('dynamodb')
 dynamodb_table = dynamodb.Table('SP_posts')
