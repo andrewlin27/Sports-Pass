@@ -3,6 +3,9 @@ import boto3
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key, Attr
 from datetime import datetime, timedelta, timezone
+import requests
+
+RECAPTCHA_SECRET_KEY = '6LeV81IqAAAAAN1z1OmNUcNZp1J3FSgtS3rKMm6T'
 
 dynamodb = boto3.resource('dynamodb')
 dynamodb_table = dynamodb.Table('SP_posts')
@@ -34,6 +37,12 @@ def lambda_handler(event, context):
                 response = approve_post(timestamp)
             else:
                 body = json.loads(event['body'])
+                
+                # Validate reCAPTCHA token
+                captcha_response = body.get('captchaToken')
+                if not captcha_response or not validate_recaptcha(captcha_response):
+                    return build_response(403, "Validation failed", cors=True)
+
                 response = post_post(body)
 
         # elif http_method == 'PATCH':
@@ -226,6 +235,18 @@ def post_post(request_body):
 #     except ClientError as e:
 #         print('Error:', e)
 #         return build_response(400, e.response['Error']['Message'], cors=True)
+
+def validate_recaptcha(captcha_response):
+    """Validate reCAPTCHA response."""
+    payload = {
+        'secret': RECAPTCHA_SECRET_KEY,
+        'response': captcha_response,
+    }
+    response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=payload)
+    result = response.json()
+
+    # Check if the reCAPTCHA was successful
+    return result.get('success', False) and result.get('score', 0) >= 0.5
 
 def delete_employee(timestamp, input_password):
     try:

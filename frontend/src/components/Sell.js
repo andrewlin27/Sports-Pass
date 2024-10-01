@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import ThankYou from "./ThankYou"; // Import the ThankYou component
 import PriceAlert from "./PriceAlert"; // Import the custom PriceAlert component
+import ReCAPTCHA from "react-google-recaptcha"; // Import ReCAPTCHA
 import "./css/Sell.css";
-import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3"; // Import reCAPTCHA v3 components
 
-const SellForm = () => {
-  const { executeRecaptcha } = useGoogleReCaptcha(); // Access the executeRecaptcha function
+const Sell = () => {
   const [formData, setFormData] = useState({
     name: "",
     class: "U1",
@@ -16,6 +15,7 @@ const SellForm = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false); // State to track submission status
   const [alertMessage, setAlertMessage] = useState(""); // State for alert message
+  const [captchaValue, setCaptchaValue] = useState(null); // State for reCAPTCHA value
 
   const maxPriceDict = {
     "Notre Dame": 100,
@@ -34,29 +34,16 @@ const SellForm = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
-      ...(name === "game" && value === "Arkansas"
-        ? { class: "" }
-        : name === "game" && prevFormData.game === "Arkansas"
-        ? { class: "U1" } // Reset to "U1" if switching back from Arkansas
+      ...(name === 'game' && value === 'Arkansas'
+        ? { class: '' }
+        : name === 'game' && prevFormData.game === 'Arkansas'
+        ? { class: 'U1' }
         : {}),
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!executeRecaptcha) {
-      setAlertMessage("reCAPTCHA not yet available");
-      return;
-    }
-
-    // Execute reCAPTCHA v3 verification
-    const captchaToken = await executeRecaptcha("sell_form_submit");
-
-    if (!captchaToken) {
-      setAlertMessage("CAPTCHA verification failed. Please try again.");
-      return;
-    }
 
     const requiredKeys = [
       "name",
@@ -83,6 +70,12 @@ const SellForm = () => {
       return;
     }
 
+    // Check if the reCAPTCHA is completed
+    if (!captchaValue) {
+      setAlertMessage("Please complete the reCAPTCHA.");
+      return;
+    }
+
     try {
       const response = await fetch(
         "https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post",
@@ -92,10 +85,7 @@ const SellForm = () => {
             "Content-Type": "application/json",
             "x-api-key": "B5UTBWtEa84n3Mpc5hMeqa1jYvwdssvUR8qgrBU8",
           },
-          body: JSON.stringify({
-            ...formData,
-            captchaToken, // Send captcha token to the backend
-          }),
+          body: JSON.stringify({ ...formData, recaptchaResponse: captchaValue }) // Include recaptchaResponse in the request body
         }
       );
 
@@ -110,6 +100,11 @@ const SellForm = () => {
       console.error("Error:", error);
       setAlertMessage("Error creating post");
     }
+  };
+
+  // Handle reCAPTCHA change
+  const onCaptchaChange = (value) => {
+    setCaptchaValue(value);
   };
 
   // Close the alert
@@ -163,7 +158,7 @@ const SellForm = () => {
               type="text"
               id="class"
               name="class"
-              value={formData.class || ""} // Use a separate field for section
+              value={formData.class || ''} // Use a separate field for section
               onChange={handleChange}
               className="class" // Apply the same className for consistent styling
               placeholder="Enter Section Number"
@@ -222,6 +217,14 @@ const SellForm = () => {
           />
         </div>
 
+        {/* Add reCAPTCHA */}
+        <div className="form-group">
+          <ReCAPTCHA
+            sitekey="6LcZT1QqAAAAAAiGGiVmxJei1OFfF_zOX2N_zWyO"
+            onChange={onCaptchaChange}
+          />
+        </div>
+
         <button type="submit" id="submit">
           Submit
         </button>
@@ -233,11 +236,5 @@ const SellForm = () => {
     </div>
   );
 };
-
-const Sell = () => (
-  <GoogleReCaptchaProvider reCaptchaKey="6LeV81IqAAAAAN1z1OmNUcNZp1J3FSgtS3rKMm6T">
-    <SellForm />
-  </GoogleReCaptchaProvider>
-);
 
 export default Sell;
