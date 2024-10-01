@@ -1,5 +1,5 @@
 .sell-page {
-    max-width: 80%;
+    max-width: 30%;
     margin: 0 auto;
     margin-top: 2%;
     padding: 40px;
@@ -9,12 +9,14 @@
     color: #333;
     max-height: 80vh; /* Set a maximum height for scrolling */
     overflow-y: auto; /* Enable vertical scrolling */
+    min-width:300px;
 }
 
 @media (max-width: 480px) {
     .sell-page {
         max-width: 90%; /* Adjust max-width for smaller screens */
         padding: 15px; /* Adjust padding for smaller screens */
+        min-width:0px;
     }
 }
 
