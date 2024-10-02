@@ -9,14 +9,14 @@ const Navbar = () => {
     <div>
       <nav className='navbar'>
         <ul className='navbar-list'>
-          <li>
+          {/* <li>
             <Link
               to="/info"
               className={location.pathname === '/info' ? 'active' : ''}
             >
               Info
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               to="/"
