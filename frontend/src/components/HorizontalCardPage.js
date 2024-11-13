@@ -12,7 +12,7 @@ const HorizontalCardPage = () => {
   useEffect(() => {
     const fetchPostById = async () => {
       try {
-        const response = await axios.get('https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post');
+        const response = await axios.get('https://sxpktops93.execute-api.us-east-2.amazonaws.com/prod/post?gettrue=yes');
         const data = response.data;
 
         const updatedData = data.map((item, index) => {
